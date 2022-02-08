@@ -23,8 +23,11 @@ variableGroups:
 - title: Network Configuration
   visible: true
   variables:
+    - enable_existing_vcn
     - generic_vcn_cidr_blocks_id
     - oke_vcn_cidr_blocks_id
+    - generic_vcn_cidr_blocks
+    - oke_vcn_cidr_blocks
     # - image_operating_system
     # - image_operating_system_version
     # - instance_shape
@@ -65,7 +68,7 @@ variables:
 
   generic_vcn_cidr_blocks_id:
     type: oci:core:vcn:id
-    title: "Generic VCN CIDR Block"
+    title: "Generic VCN CIDR Block ID"
     description: "Please input the Generic VCN CIDR Block"
     dependsOn:
       compartmentId: compartment_ocid
@@ -73,7 +76,7 @@ variables:
 
   oke_vcn_cidr_blocks_id:
     type: oci:core:vcn:id
-    title: "OKE VCN CIDR Block"
+    title: "OKE VCN CIDR Block ID"
     description: "Please input the OKE VCN CIDR Block"
     dependsOn:
       compartmentId: compartment_ocid
