@@ -15,11 +15,10 @@ variableGroups:
     - tenancy_ocid
     - region
 
-# - title: Required Configuration
-#   visible: true
-#   variables:
-#     - awx_cluster_name
-#     - resource_naming_prefix
+- title: Required Configuration
+  visible: true
+  variables:
+    - resource_naming_prefix
 
 # - title: Optional Configuration
 #   visible: true

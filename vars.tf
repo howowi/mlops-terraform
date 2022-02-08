@@ -44,7 +44,17 @@ variable "region" {
   type        = string
 }
 
-variable "vcn_cidr_blocks" {
-  description = "VCN CIDR Blocks"
+variable "generic_vcn_cidr_blocks" {
+  description = "VCN CIDR Block for Generic MLOps resources"
   default = "10.0.0.0/16"
+}
+
+variable "oke_vcn_cidr_blocks" {
+  description = "VCN CIDR Blocks for OKE Cluster"
+  default = "10.1.0.0/16"
+}
+
+variable "resource_naming_prefix" {
+  description = "Prefix for all resource display names"
+  type        = string
 }
