@@ -61,11 +61,15 @@ variables:
     type: oci:core:vcn:id
     title: "Generic VCN CIDR Block"
     description: "Please input the Generic VCN CIDR Block"
+    dependsOn:
+      compartmentId: compartment_ocid
 
   oke_vcn_cidr_blocks:
     type: oci:core:vcn:id
     title: "OKE VCN CIDR Block"
     description: "Please input the OKE VCN CIDR Block"
+    dependsOn:
+      compartmentId: compartment_ocid
 
 # outputs:
 #   cluster:
