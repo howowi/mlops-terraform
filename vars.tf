@@ -57,4 +57,5 @@ variable "oke_vcn_cidr_blocks" {
 variable "resource_naming_prefix" {
   description = "Prefix for all resource display names"
   type        = string
+  default = "demo"
 }

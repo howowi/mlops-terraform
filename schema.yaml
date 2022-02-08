@@ -20,16 +20,17 @@ variableGroups:
   variables:
     - resource_naming_prefix
 
-# - title: Optional Configuration
-#   visible: true
-#   variables:
-#     - awx_node_ssh_public_key
-#     - image_operating_system
-#     - image_operating_system_version
-#     - instance_shape
-#     - shape_ocpus
-#     - shape_mems
-#     - awx_execution_env_image_name
+- title: Network Configuration
+  visible: true
+  variables:
+    - generic_vcn_cidr_blocks
+    - oke_vcn_cidr_blocks
+    # - image_operating_system
+    # - image_operating_system_version
+    # - instance_shape
+    # - shape_ocpus
+    # - shape_mems
+    # - awx_execution_env_image_name
 
 variables:
   compartment_ocid:
@@ -49,6 +50,22 @@ variables:
     required: true
     title: "Region"
     description: "Please select the target region"
+
+  resource_naming_prefix:
+    type: string
+    required: true
+    title: "Resource naming prefix"
+    description: "Please input the resource naming prefix for OCI resources"
+
+  generic_vcn_cidr_blocks:
+    type: oci:core:vcn:id
+    title: "Generic VCN CIDR Block"
+    description: "Please input the Generic VCN CIDR Block"
+
+  oke_vcn_cidr_blocks:
+    type: oci:core:vcn:id
+    title: "OKE VCN CIDR Block"
+    description: "Please input the OKE VCN CIDR Block"
 
 # outputs:
 #   cluster:
