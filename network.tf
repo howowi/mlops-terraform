@@ -62,7 +62,7 @@ resource oci_core_service_gateway test-oke-sgw {
   compartment_id = var.compartment_ocid
   display_name = "${var.resource_naming_prefix}-test-oke-sgw"
   services {
-    service_id = data.oci_core_services.all_services.services.0.id
+    service_id = data.oci_core_services.all_services.services.1.id
   }
   vcn_id = oci_core_vcn.test-oke-vcn.id
 }

@@ -64,7 +64,7 @@ data "oci_core_services" "all_services" {
 }
 
 output "core_services" {
-  value = data.oci_core_services.all_services
+  value = data.oci_core_services.all_services.1
   depends_on = [
     data.oci_core_services.all_services
   ]
