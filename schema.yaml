@@ -83,16 +83,14 @@ variables:
     visible: enable_existing_vcn
 
   generic_vcn_cidr_blocks:
-    type: oci:core:vcn:id
+    type: string
     title: "Generic VCN CIDR Block"
     description: "Please input the Generic VCN CIDR Block"
-    visible: not enable_existing_vcn
 
   oke_vcn_cidr_blocks:
-    type: oci:core:vcn:id
+    type: string
     title: "OKE VCN CIDR Block"
     description: "Please input the OKE VCN CIDR Block"
-    visible: not enable_existing_vcn
 
 # outputs:
 #   cluster:
