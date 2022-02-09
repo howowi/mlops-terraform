@@ -65,4 +65,7 @@ data "oci_core_services" "all_services" {
 
 output "core services" {
   value = data.oci_core_services.all_services.0.name
+  depends_on = [
+    data.oci_core_services.all_services
+  ]
 }
