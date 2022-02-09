@@ -48,24 +48,24 @@ resource oci_core_internet_gateway test-oke-igw {
   vcn_id = oci_core_vcn.test-oke-vcn.id
 }
 
-# ## ------- Service Gateway ------- ## Pending
-# resource oci_core_service_gateway export_oke-sgw-quick-prod_oke_cluster_ry-21e30b072 {
-#   compartment_id = var.compartment_ocid
-#   display_name = "oke-sgw-quick-prod_oke_cluster_ry-21e30b072"
-#   services {
-#     service_id = "ocid1.service.oc1.phx.aaaaaaaasgvxtsqcj2jkt2xppos637xym4ab5qqqptgwjd4guj7v3d26t7oa"
-#   }
-#   vcn_id = oci_core_vcn.export_oke-vcn-quick-prod_oke_cluster_ry-21e30b072.id
-# }
+## ------- Service Gateway ------- ##
+resource oci_core_service_gateway prod-oke-sgw {
+  compartment_id = var.compartment_ocid
+  display_name = "${var.resource_naming_prefix}-prod-oke-sgw"
+  services {
+    service_id = data.oci_core_services.all_services.services.0.id
+  }
+  vcn_id = oci_core_vcn.prod-oke-vcn.id
+}
 
-# resource oci_core_service_gateway export_oke-sgw-quick-test_oke_cluster_ry-7bc0980c4 {
-#   compartment_id = var.compartment_ocid
-#   display_name = "oke-sgw-quick-test_oke_cluster_ry-7bc0980c4"
-#   services {
-#     service_id = "ocid1.service.oc1.phx.aaaaaaaasgvxtsqcj2jkt2xppos637xym4ab5qqqptgwjd4guj7v3d26t7oa"
-#   }
-#   vcn_id = oci_core_vcn.export_oke-vcn-quick-test_oke_cluster_ry-7bc0980c4.id
-# }
+resource oci_core_service_gateway test-oke-sgw {
+  compartment_id = var.compartment_ocid
+  display_name = "${var.resource_naming_prefix}-test-oke-sgw"
+  services {
+    service_id = data.oci_core_services.all_services.services.0.id
+  }
+  vcn_id = oci_core_vcn.test-oke-vcn.id
+}
 
 # ## ------- NAT Gateway ------- ## Pending
 # resource oci_core_nat_gateway export_oke-ngw-quick-prod_oke_cluster_ry-21e30b072 {
