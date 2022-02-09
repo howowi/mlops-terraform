@@ -25,14 +25,19 @@ variableGroups:
   variables:
     - generic_vcn_cidr_blocks
     - oke_vcn_cidr_blocks
+    - oke_k8sapiendpoint_subnet_cidr_block
+    - oke_service_lb_subnet_cidr_block
+    - oke_nodepool_cidr_block
+
 
 - title: OKE Cluster Configuration
   visible: true
+    - kubernetes_version
+    - node_shape
+    - shape_ocpus
+    - shape_mems
     # - image_operating_system
     # - image_operating_system_version
-    # - instance_shape
-    # - shape_ocpus
-    # - shape_mems
 
 variables:
   compartment_ocid:
@@ -77,10 +82,35 @@ variables:
     description: "The public SSH key for the key-pair that you want to use, if you wish to login to the instances over SSH"
     required: true
 
-  ssh_private_key:
-    title: "Generated Private Key for SSH Access"
-    description: The private SSH key for the key-pair that you want to use
-    sensitive: true
+  kubernetes_version:
+    title: "Kubernetes Version"
+    type: enum
+    description: "Please choose the supported Kubernetes version"
+    default: "v1.21.5"
+    enum:
+      - "v1.21.5"
+      - "v1.20.11"
+      - "v1.20.8"
+      - "v1.19.15"
+
+  node_shape:
+    title: "Node shape"
+    type: oci:core:instanceshape:name
+    description: "Please choose the supported instance shape for the node"
+    dependsOn:      
+       compartmentId: ${compartment_ocid}
+
+  shape_ocpus:
+    title: "Number of OCPUs of each node"
+    type: string
+    description: "Please key in the number of OCPUs"
+
+  shape_mems:
+    title: "Memory of each node in GB"
+    type: string
+    description: "Please key in the amount of memory in GB"
+
+  
 
 # outputs:
 #   cluster:

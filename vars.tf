@@ -65,5 +65,38 @@ variable "ssh_public_key" {
   type        = string
 }
 
+variable "oke_k8sapiendpoint_subnet_cidr_block" {
+  description = "Subnet CIDR Block for OKE API Endpoint"
+  default = "10.1.0.0/24"
+}
+
+variable "oke_service_lb_subnet_cidr_block" {
+  description = "Subnet CIDR Block for Service Load Balancer"
+  default = "10.1.1.0/24"
+}
+
+variable "oke_nodepool_cidr_block" {
+  description = "Subnet CIDR Block for worker nodepool"
+  default = "10.1.2.0/24"
+}
+
+variable "kubernetes_version" {
+  description = "Kubernetes version"
+}
+
+variable "shape_ocpus" {
+  description = "Number of OCPUs of each node"
+  default = "8"
+}
+
+variable "shape_mems" {
+  description = "Memory of each node in GB"
+  default = "128"
+}
+
 data "oci_core_services" "all_services" {
+}
+
+data "availability_domain" "" {
+  
 }
