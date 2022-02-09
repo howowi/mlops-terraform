@@ -59,3 +59,6 @@ variable "resource_naming_prefix" {
   type        = string
   default = "demo"
 }
+
+data "oci_core_services" "all_services" {
+}
