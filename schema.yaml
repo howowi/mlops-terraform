@@ -23,17 +23,16 @@ variableGroups:
 - title: Network Configuration
   visible: true
   variables:
-    - enable_existing_vcn
-    - generic_vcn_cidr_blocks_id
-    - oke_vcn_cidr_blocks_id
     - generic_vcn_cidr_blocks
     - oke_vcn_cidr_blocks
+
+- title: OKE Cluster Configuration
+  visible: true
     # - image_operating_system
     # - image_operating_system_version
     # - instance_shape
     # - shape_ocpus
     # - shape_mems
-    # - awx_execution_env_image_name
 
 variables:
   compartment_ocid:
@@ -60,37 +59,28 @@ variables:
     title: "Resource naming prefix"
     description: "Please input the resource naming prefix for OCI resources"
 
-  enable_existing_vcn:
-    type: boolean
-    title: "Using existing VCNs?"
-    required: true
-    default: true
-
-  generic_vcn_cidr_blocks_id:
-    type: oci:core:vcn:id
-    title: "Generic VCN CIDR Block ID"
-    description: "Please input the Generic VCN CIDR Block"
-    dependsOn:
-      compartmentId: compartment_ocid
-    visible: enable_existing_vcn
-
-  oke_vcn_cidr_blocks_id:
-    type: oci:core:vcn:id
-    title: "OKE VCN CIDR Block ID"
-    description: "Please input the OKE VCN CIDR Block"
-    dependsOn:
-      compartmentId: compartment_ocid
-    visible: enable_existing_vcn
-
   generic_vcn_cidr_blocks:
     type: string
+    required: true
     title: "Generic VCN CIDR Block"
     description: "Please input the Generic VCN CIDR Block"
 
   oke_vcn_cidr_blocks:
     type: string
+    required: true
     title: "OKE VCN CIDR Block"
     description: "Please input the OKE VCN CIDR Block"
+
+  ssh_public_key:
+    title: "SSH Public Key"
+    type: oci:core:ssh:publickey
+    description: "The public SSH key for the key-pair that you want to use, if you wish to login to the instances over SSH"
+    required: true
+
+  ssh_private_key:
+    title: "Generated Private Key for SSH Access"
+    description: The private SSH key for the key-pair that you want to use
+    sensitive: true
 
 # outputs:
 #   cluster:

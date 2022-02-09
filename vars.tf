@@ -60,12 +60,10 @@ variable "resource_naming_prefix" {
   default = "demo"
 }
 
-data "oci_core_services" "all_services" {
+variable "ssh_public_key" {
+  description = "SSH public key to access node"
+  type        = string
 }
 
-output "core_services" {
-  value = data.oci_core_services.all_services.1
-  depends_on = [
-    data.oci_core_services.all_services
-  ]
+data "oci_core_services" "all_services" {
 }
