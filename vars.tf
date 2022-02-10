@@ -84,6 +84,11 @@ variable "kubernetes_version" {
   description = "Kubernetes version"
 }
 
+variable "node_shape" {
+  description = "Instance shape of the node"
+  default = "VM.Standard.E3.Flex"
+}
+
 variable "shape_ocpus" {
   description = "Number of OCPUs of each node"
   default = "8"
