@@ -170,7 +170,7 @@ resource oci_core_route_table test-oke-private-routetable {
 resource oci_core_subnet prod-oke-k8sapiendpoint-subnet {
   depends_on     = [oci_core_vcn.prod-oke-vcn, oci_core_default_route_table.prod-oke-public-routetable, oci_core_security_list.prod-oke-k8sapiendpoint-sl]
   cidr_block = var.oke_k8sapiendpoint_subnet_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-k8sapiendpoint-subnet"
   route_table_id =  oci_core_default_route_table.prod-oke-public-routetable.id
@@ -503,8 +503,6 @@ resource oci_core_security_list test-oke-nodepool-sl {
       max = "6443"
       min = "6443"
       source_port_range {
-        max = "all"
-        min = "all"
       }
     }
 	}
