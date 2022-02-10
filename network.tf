@@ -174,7 +174,7 @@ resource oci_core_subnet prod-oke-k8sapiendpoint-subnet {
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-k8sapiendpoint-subnet"
   route_table_id =  oci_core_default_route_table.prod-oke-public-routetable.id
-  security_list_ids = oci_core_security_list.prod-oke-k8sapiendpoint-sl.id
+  security_list_ids = [oci_core_security_list.prod-oke-k8sapiendpoint-sl.id]
 }
 
 resource oci_core_subnet prod-oke-service_lb-subnet {
@@ -183,7 +183,7 @@ resource oci_core_subnet prod-oke-service_lb-subnet {
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-service_lb-subnet"
   route_table_id = oci_core_default_route_table.prod-oke-public-routetable.id
-  security_list_ids = oci_core_security_list.prod-oke-service_lb-sl.id
+  security_list_ids = [oci_core_security_list.prod-oke-service_lb-sl.id]
 }
 
 resource oci_core_subnet prod-oke-nodepool-subnet {
@@ -192,7 +192,7 @@ resource oci_core_subnet prod-oke-nodepool-subnet {
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-nodepool-subnet"
   route_table_id = oci_core_route_table.prod-oke-private-routetable.id
-  security_list_ids = oci_core_security_list.prod-oke-nodepool-sl.id
+  security_list_ids = [oci_core_security_list.prod-oke-nodepool-sl.id]
 }
 
 resource oci_core_security_list prod-oke-k8sapiendpoint-sl {
