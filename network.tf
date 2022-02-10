@@ -4,7 +4,7 @@ resource oci_core_vcn mlops-vcn {
     var.generic_vcn_cidr_blocks,
   ]
   compartment_id = var.compartment_ocid
-  display_name = "${var.resource_naming_prefix}-mlops-generic-vcn"
+  display_name = "${var.resource_naming_prefix}-mlops-vcn"
   dns_label    = "mlopsvcn"
 }
 
@@ -31,7 +31,7 @@ resource oci_core_internet_gateway mlops-igw {
   depends_on     = [oci_core_vcn.mlops-vcn]
   compartment_id = var.compartment_ocid
   display_name = "${var.resource_naming_prefix}-mlops-igw"
-  vcn_id = oci_core_vcn.mlops-generic-vcn.id
+  vcn_id = oci_core_vcn.mlops-vcn.id
 }
 
 resource oci_core_internet_gateway prod-oke-igw {
@@ -179,7 +179,7 @@ resource oci_core_subnet prod-oke-k8sapiendpoint-subnet {
 
 resource oci_core_subnet prod-oke-service_lb-subnet {
   cidr_block = var.oke_service_lb_subnet_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-service_lb-subnet"
   route_table_id = oci_core_default_route_table.prod-oke-public-routetable.id
@@ -188,7 +188,7 @@ resource oci_core_subnet prod-oke-service_lb-subnet {
 
 resource oci_core_subnet prod-oke-nodepool-subnet {
   cidr_block = var.oke_nodepool_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-nodepool-subnet"
   route_table_id = oci_core_route_table.prod-oke-private-routetable.id
@@ -196,7 +196,7 @@ resource oci_core_subnet prod-oke-nodepool-subnet {
 }
 
 resource oci_core_security_list prod-oke-k8sapiendpoint-sl {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-k8sapiendpoint-sl"
   
@@ -256,13 +256,13 @@ resource oci_core_security_list prod-oke-k8sapiendpoint-sl {
 }
 
 resource oci_core_security_list prod-oke-service_lb-sl {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-service_lb-sl"
 }
 
 resource oci_core_security_list prod-oke-nodepool-sl {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-nodepool-sl"
 
@@ -390,7 +390,7 @@ resource oci_core_security_list prod-oke-nodepool-sl {
 resource oci_core_subnet test-oke-k8sapiendpoint-subnet {
   depends_on     = [oci_core_vcn.test-oke-vcn, oci_core_default_route_table.test-oke-public-routetable, oci_core_security_list.test-oke-k8sapiendpoint-sl]
   cidr_block = var.oke_k8sapiendpoint_subnet_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-k8sapiendpoint-subnet"
   route_table_id =  oci_core_default_route_table.test-oke-public-routetable.id
@@ -399,7 +399,7 @@ resource oci_core_subnet test-oke-k8sapiendpoint-subnet {
 
 resource oci_core_subnet test-oke-service_lb-subnet {
   cidr_block = var.oke_service_lb_subnet_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-service_lb-subnet"
   route_table_id = oci_core_default_route_table.test-oke-public-routetable.id
@@ -408,7 +408,7 @@ resource oci_core_subnet test-oke-service_lb-subnet {
 
 resource oci_core_subnet test-oke-nodepool-subnet {
   cidr_block = var.oke_nodepool_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-nodepool-subnet"
   route_table_id = oci_core_route_table.test-oke-private-routetable.id
@@ -416,7 +416,7 @@ resource oci_core_subnet test-oke-nodepool-subnet {
 }
 
 resource oci_core_security_list test-oke-k8sapiendpoint-sl {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-k8sapiendpoint-sl"
   
@@ -476,13 +476,13 @@ resource oci_core_security_list test-oke-k8sapiendpoint-sl {
 }
 
 resource oci_core_security_list test-oke-service_lb-sl {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-service_lb-sl"
 }
 
 resource oci_core_security_list test-oke-nodepool-sl {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-nodepool-sl"
 

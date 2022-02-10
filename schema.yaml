@@ -15,7 +15,7 @@ variableGroups:
     - tenancy_ocid
     - region
 
-- title: Required Configuration
+- title: General Configuration
   visible: true
   variables:
     - resource_naming_prefix
