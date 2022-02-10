@@ -38,6 +38,7 @@ variableGroups:
     - shape_ocpus
     - shape_mems
     - image_os_id
+    - ssh_public_key
 
 variables:
   compartment_ocid:
@@ -75,6 +76,24 @@ variables:
     required: true
     title: "OKE VCN CIDR Block"
     description: "Please input the OKE VCN CIDR Block"
+
+  oke_k8sapiendpoint_subnet_cidr_block:
+    type: string
+    required: true
+    title: "OKE API Endpoint Subnet CIDR Block"
+    description: "Please input the OKE API Endpoint Subnet CIDR Block"
+
+  oke_service_lb_subnet_cidr_block:
+    type: string
+    required: true
+    title: "OKE Service Load Balancer Subnet CIDR Block"
+    description: "Please input the OKE Service Load Balancer Subnet CIDR Block"
+
+  oke_nodepool_cidr_block:
+    type: string
+    required: true
+    title: "OKE Node Pool Subnet CIDR Block"
+    description: "Please input the OKE Node Pool Subnet CIDR Block"
 
   ssh_public_key:
     title: "SSH Public Key"
