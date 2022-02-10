@@ -36,8 +36,7 @@ variableGroups:
     - node_shape
     - shape_ocpus
     - shape_mems
-    # - image_operating_system
-    # - image_operating_system_version
+    - image_os_id
 
 variables:
   compartment_ocid:
@@ -109,6 +108,15 @@ variables:
     title: "Memory of each node in GB"
     type: string
     description: "Please key in the amount of memory in GB"
+
+  image_os_id:
+    title: "OS Image OCID of the node pool"
+    type: oci:core:image:id
+    description: "Please choose the supported OS image for the node"
+    dependsOn:      
+       compartmentId: ${compartment_ocid}
+       operatingSystem: "Oracle Linux"
+       shape: ${node_shape}
 
   
 
