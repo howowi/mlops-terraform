@@ -283,8 +283,8 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       max = "6443"
       min = "6443"
       source_port_range {
-        max = "all"
-        min = "all"
+        max = ""
+        min = ""
       }
     }
 	}
@@ -298,8 +298,8 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       max = "12250"
       min = "12250"
       source_port_range {
-        max = "all"
-        min = "all"
+        max = ""
+        min = ""
       }
     }
 	}
@@ -324,8 +324,8 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       max = "443"
       min = "443"
       source_port_range {
-        max = "all"
-        min = "all"
+        max = ""
+        min = ""
       }
     }
 	}
@@ -378,8 +378,8 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       max = "22"
       min = "22"
       source_port_range {
-        max = "all"
-        min = "all"
+        max = ""
+        min = ""
       }
     }
 	}
@@ -503,6 +503,8 @@ resource oci_core_security_list test-oke-nodepool-sl {
       max = "6443"
       min = "6443"
       source_port_range {
+		  max = ""
+		  min = ""
       }
     }
 	}
@@ -516,8 +518,8 @@ resource oci_core_security_list test-oke-nodepool-sl {
       max = "12250"
       min = "12250"
       source_port_range {
-        max = "all"
-        min = "all"
+        max = ""
+        min = ""
       }
     }
 	}
@@ -542,8 +544,8 @@ resource oci_core_security_list test-oke-nodepool-sl {
       max = "443"
       min = "443"
       source_port_range {
-        max = "all"
-        min = "all"
+        max = ""
+        min = ""
       }
     }
 	}
@@ -596,8 +598,8 @@ resource oci_core_security_list test-oke-nodepool-sl {
       max = "22"
       min = "22"
       source_port_range {
-        max = "all"
-        min = "all"
+        max = ""
+        min = ""
       }
     }
 	}
