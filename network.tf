@@ -165,6 +165,38 @@ resource oci_core_route_table test-oke-private-routetable {
   vcn_id = oci_core_vcn.test-oke-vcn.id
 }
 
+## ----- MLOps Public Subnet ----- ##
+resource oci_core_subnet mlops-public-subnet {
+  depends_on     = [oci_core_vcn.mlops-vcn, oci_core_default_route_table.prod-oke-public-routetable, oci_core_security_list.prod-oke-k8sapiendpoint-sl]
+  cidr_block = var.generic_vcn_cidr_blocks
+  compartment_id = var.compartment_ocid
+  vcn_id = oci_core_vcn.mlops-vcn.id
+  display_name = "${var.resource_naming_prefix}-mlops-public-subnet"
+  route_table_id =  oci_core_default_route_table.mlops-default-routetable.id
+  security_list_ids = [oci_core_security_list.mlops-public-sl.id]
+}
+
+resource oci_core_security_list mlops-public-sl {
+  compartment_id = var.compartment_ocid
+  vcn_id = oci_core_vcn.mlops-vcn.id
+  display_name = "${var.resource_naming_prefix}-mlops-public-sl"
+
+  egress_security_rules {
+	  description = "Allow all traffic"
+	  destination = "0.0.0.0/0"
+	  protocol = "all"
+	  stateless = "false"
+  }
+
+  ingress_security_rules {
+	  description = "Allow all traffic"
+	  source = "0.0.0.0/0"
+	  protocol = "all"
+	  stateless = "false"
+  }
+}
+
+
 ## ----- Production OKE Subnets and Security Lists ----- ##
 
 resource oci_core_subnet prod-oke-k8sapiendpoint-subnet {

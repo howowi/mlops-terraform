@@ -103,6 +103,19 @@ variable "image_os_id" {
   description = "OS Image OCID of the node pool"
 }
 
+variable "email_address" {
+  description = "Email address for OCI DevOps Notificatio"
+}
+
+variable "test_ml_model_func_image" {
+  description = "Qualified name of the Docker image for the function"
+  default = "iad.ocir.io/apaccpt03/test-ml-model:0.0.50"
+}
+
+variable "k8s_manifest" {
+  description = "Base64 Encoded K8s Manifest File"
+}
+
 data "oci_core_services" "all_services" {
 }
 
