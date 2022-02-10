@@ -259,6 +259,20 @@ resource oci_core_security_list prod-oke-service_lb-sl {
   compartment_id = var.compartment_ocid
   vcn_id = oci_core_vcn.prod-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-prod-oke-service_lb-sl"
+
+  egress_security_rules {
+	  description = "Allow all traffic"
+	  destination = "0.0.0.0/0"
+	  protocol = "all"
+	  stateless = "false"
+  }
+
+  ingress_security_rules {
+	  description = "Allow all traffic"
+	  source = "0.0.0.0/0"
+	  protocol = "all"
+	  stateless = "false"
+  }
 }
 
 resource oci_core_security_list prod-oke-nodepool-sl {
@@ -284,7 +298,7 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       min = "6443"
       source_port_range {
         max = "65535"
-        min = "0"
+        min = "1"
       }
     }
 	}
@@ -299,7 +313,7 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       min = "12250"
       source_port_range {
         max = "65535"
-        min = "0"
+        min = "1"
       }
     }
 	}
@@ -325,7 +339,7 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       min = "443"
       source_port_range {
         max = "65535"
-        min = "0"
+        min = "1"
       }
     }
 	}
@@ -379,7 +393,7 @@ resource oci_core_security_list prod-oke-nodepool-sl {
       min = "22"
       source_port_range {
         max = "65535"
-        min = "0"
+        min = "1"
       }
     }
 	}
@@ -504,7 +518,7 @@ resource oci_core_security_list test-oke-nodepool-sl {
       min = "6443"
       source_port_range {
 		  max = "65535"
-		  min = "0"
+		  min = "1"
       }
     }
 	}
@@ -519,7 +533,7 @@ resource oci_core_security_list test-oke-nodepool-sl {
       min = "12250"
       source_port_range {
         max = "65535"
-        min = "0"
+        min = "1"
       }
     }
 	}
@@ -545,7 +559,7 @@ resource oci_core_security_list test-oke-nodepool-sl {
       min = "443"
       source_port_range {
         max = "65535"
-        min = "0"
+        min = "1"
       }
     }
 	}
@@ -599,7 +613,7 @@ resource oci_core_security_list test-oke-nodepool-sl {
       min = "22"
       source_port_range {
         max = "65535"
-        min = "0"
+        min = "1"
       }
     }
 	}
