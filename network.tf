@@ -394,7 +394,7 @@ resource oci_core_subnet test-oke-k8sapiendpoint-subnet {
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-k8sapiendpoint-subnet"
   route_table_id =  oci_core_default_route_table.test-oke-public-routetable.id
-  security_list_ids = oci_core_security_list.test-oke-k8sapiendpoint-sl.id
+  security_list_ids = [oci_core_security_list.test-oke-k8sapiendpoint-sl.id]
 }
 
 resource oci_core_subnet test-oke-service_lb-subnet {
@@ -403,7 +403,7 @@ resource oci_core_subnet test-oke-service_lb-subnet {
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-service_lb-subnet"
   route_table_id = oci_core_default_route_table.test-oke-public-routetable.id
-  security_list_ids = oci_core_security_list.test-oke-service_lb-sl.id
+  security_list_ids = [oci_core_security_list.test-oke-service_lb-sl.id]
 }
 
 resource oci_core_subnet test-oke-nodepool-subnet {
@@ -412,7 +412,7 @@ resource oci_core_subnet test-oke-nodepool-subnet {
   vcn_id = oci_core_vcn.test-oke-vcn.id
   display_name = "${var.resource_naming_prefix}-test-oke-nodepool-subnet"
   route_table_id = oci_core_route_table.test-oke-private-routetable.id
-  security_list_ids = oci_core_security_list.test-oke-nodepool-sl.id
+  security_list_ids = [oci_core_security_list.test-oke-nodepool-sl.id]
 }
 
 resource oci_core_security_list test-oke-k8sapiendpoint-sl {
