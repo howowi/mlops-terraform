@@ -32,6 +32,7 @@ variableGroups:
 
 - title: OKE Cluster Configuration
   visible: true
+  variables:
     - kubernetes_version
     - node_shape
     - shape_ocpus
