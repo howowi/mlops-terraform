@@ -125,18 +125,6 @@ resource oci_devops_deploy_artifact model-testing-dataset-1 {
   display_name = "${var.resource_naming_prefix}-model-testing-dataset-1"
 }
 
-resource oci_devops_deploy_artifact model-testing-dataset-1 {
-  argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
-  deploy_artifact_source {
-    base64encoded_content = "eyJ1cmwiOiIke3VybF90ZXN0fSIsICJidWNrZXQiOiIke2J1Y2tldH0iLCAib2JqZWN0IjoiJHtkYXRhc2V0XzF9In0="
-    deploy_artifact_source_type = "INLINE"
-  }
-  deploy_artifact_type = "GENERIC_FILE"
-  project_id = oci_devops_project.mlops-devops-project.id
-  description = "Model Testing Dataset 1"
-  display_name = "${var.resource_naming_prefix}-model-testing-dataset-1"
-}
-
 resource oci_devops_deploy_artifact model-testing-config {
   argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
   deploy_artifact_source {
