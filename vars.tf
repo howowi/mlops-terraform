@@ -109,7 +109,7 @@ variable "email_address" {
 
 variable "test_ml_model_func_image" {
   description = "Qualified name of the Docker image for the function"
-  default = "iad.ocir.io/apaccpt03/test-ml-model:0.0.50"
+  default = "lhr.ocir.io/apaccpt01/verify-http-code:0.0.22"
 }
 
 data "oci_core_services" "all_services" {
