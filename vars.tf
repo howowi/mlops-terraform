@@ -112,10 +112,6 @@ variable "test_ml_model_func_image" {
   default = "iad.ocir.io/apaccpt03/test-ml-model:0.0.50"
 }
 
-variable "k8s_manifest" {
-  description = "Base64 Encoded K8s Manifest File"
-}
-
 data "oci_core_services" "all_services" {
 }
 

@@ -44,7 +44,6 @@ variableGroups:
 - title: OCI DevOps Configuration
   visible: true
   variables:
-    - k8s_manifest
     - email_address
     - test_ml_model_func_image
 
@@ -156,11 +155,6 @@ variables:
     title: "Qualified name of the Docker image for the function"
     type: string
     description: "Example: phx.ocir.io/ten/functions/function:0.0.1"
-  
-  k8s_manifest:
-    title: "Base64 Encoded K8s Manifest File"
-    type: file
-    description: "Please upload the base64-encoded K8s Manifest File for deployment"
 
 
 # outputs:
