@@ -93,7 +93,7 @@ resource oci_devops_deploy_artifact k8s-manifest-artifact {
     argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
     deploy_artifact_source {
         deploy_artifact_source_type = "INLINE"
-        base64encoded_content = "LS0tCmFwaVZlcnNpb246IHYxCmtpbmQ6IFNlcnZpY2UKbWV0YWRhdGE6CiAgbmFtZTogbWwtbW9kZWwtc2VydmljZQogIG5hbWVzcGFjZTogbWwtbW9kZWwKc3BlYzoKICB0eXBlOiBMb2FkQmFsYW5jZXIKICBwb3J0czoKICAtIHBvcnQ6IDgwODAKICBzZWxlY3RvcjoKICAgIGFwcDogbWwtbW9kZWwKLS0tCmFwaVZlcnNpb246IGFwcHMvdjEKa2luZDogRGVwbG95bWVudAptZXRhZGF0YToKICBuYW1lOiBtbC1tb2RlbC1kZXBsb3ltZW50CiAgbmFtZXNwYWNlOiBtbC1tb2RlbAogIGxhYmVsczoKICAgIGFwcDogbWwtbW9kZWwKc3BlYzoKICByZXBsaWNhczogMwogIHNlbGVjdG9yOgogICAgbWF0Y2hMYWJlbHM6CiAgICAgIGFwcDogbWwtbW9kZWwKICB0ZW1wbGF0ZToKICAgIG1ldGFkYXRhOgogICAgICBsYWJlbHM6CiAgICAgICAgYXBwOiBtbC1tb2RlbAogICAgc3BlYzoKICAgICAgY29udGFpbmVyczoKICAgICAgLSBuYW1lOiBtbC1tb2RlbC1jb250YWluZXIKICAgICAgICBpbWFnZTogaWFkLm9jaXIuaW8vYXBhY2NwdDAzL21sb3BzLW1vZGVsOiR7QlVJTERSVU5fSEFTSH0KICAgICAgICByZXNvdXJjZXM6CiAgICAgICAgICByZXF1ZXN0czoKICAgICAgICAgICAgbWVtb3J5OiAiNTAwTWkiCiAgICAgICAgICAgIGNwdTogIjEwMDBtIgogICAgICAgICAgbGltaXRzOgogICAgICAgICAgICBtZW1vcnk6ICIxR2kiCiAgICAgICAgICAgIGNwdTogIjIwMDBtIgogICAgICAgIHBvcnRzOgogICAgICAgIC0gY29udGFpbmVyUG9ydDogODA4MAogICAgICBpbWFnZVB1bGxTZWNyZXRzOgogICAgICAtIG5hbWU6IG9jaXItc2VjcmV0Ci0tLQ=="
+        base64encoded_content = "---\napiVersion: v1\nkind: Service\nmetadata:\n  name: ml-model-service\n  namespace: ml-model\nspec:\n  type: LoadBalancer\n  ports:\n  - port: 8080\n  selector:\n    app: ml-model\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: ml-model-deployment\n  namespace: ml-model\n  labels:\n    app: ml-model\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: ml-model\n  template:\n    metadata:\n      labels:\n        app: ml-model\n    spec:\n      containers:\n      - name: ml-model-container\n        image: iad.ocir.io/apaccpt03/mlops-model:$${BUILDRUN_HASH}\n        resources:\n          requests:\n            memory: \"500Mi\"\n            cpu: \"1000m\"\n          limits:\n            memory: \"1Gi\"\n            cpu: \"2000m\"\n        ports:\n        - containerPort: 8080\n      imagePullSecrets:\n      - name: ocir-secret\n---"
     }
     deploy_artifact_type = "KUBERNETES_MANIFEST"
     project_id = oci_devops_project.mlops-devops-project.id
@@ -104,7 +104,7 @@ resource oci_devops_deploy_artifact k8s-manifest-artifact {
 resource oci_devops_deploy_artifact model-testing-dataset-2 {
   argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
   deploy_artifact_source {
-    base64encoded_content = "eyJ1cmwiOiIke3VybF90ZXN0fSIsICJidWNrZXQiOiIke2J1Y2tldH0iLCAib2JqZWN0IjoiJHtkYXRhc2V0XzJ9In0="
+    base64encoded_content = "{\"url\":\"$${url_test}\", \"bucket\":\"$${bucket}\", \"object\":\"$${dataset_2}\"}"
     deploy_artifact_source_type = "INLINE"
   }
   deploy_artifact_type = "GENERIC_FILE"
@@ -116,7 +116,7 @@ resource oci_devops_deploy_artifact model-testing-dataset-2 {
 resource oci_devops_deploy_artifact model-testing-dataset-1 {
   argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
   deploy_artifact_source {
-    base64encoded_content = "eyJ1cmwiOiIke3VybF90ZXN0fSIsICJidWNrZXQiOiIke2J1Y2tldH0iLCAib2JqZWN0IjoiJHtkYXRhc2V0XzF9In0="
+    base64encoded_content = "{\"url\":\"$${url_test}\", \"bucket\":\"$${bucket}\", \"object\":\"$${dataset_1}\"}"
     deploy_artifact_source_type = "INLINE"
   }
   deploy_artifact_type = "GENERIC_FILE"
@@ -128,7 +128,7 @@ resource oci_devops_deploy_artifact model-testing-dataset-1 {
 resource oci_devops_deploy_artifact model-testing-config {
   argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
   deploy_artifact_source {
-    base64encoded_content = "eyJ1cmwiOiIke3VybF90ZXN0fSIsICJidWNrZXQiOiIke2J1Y2tldH0iLCAib2JqZWN0IjoiJHtvYmplY3R9In0="
+    base64encoded_content = "{\"url\":\"$${url_test}\", \"bucket\":\"$${bucket}\", \"object\":\"$${object}\"}"
     deploy_artifact_source_type = "INLINE"
   }
   deploy_artifact_type = "GENERIC_FILE"
