@@ -1,0 +1,4 @@
+category-encoders
+pandas
+requests
+Flask
