@@ -51,7 +51,7 @@ resource oci_devops_repository mlops-code-repo {
     project_id = oci_devops_project.mlops-devops-project.id
     default_branch = "refs/heads/main"
     description = "Code repo for MLOps"
-    repository_type = "Hosted"
+    repository_type = "HOSTED"
 }
 
 ## ----- Deployment Pipeline ----- ##
