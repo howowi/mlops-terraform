@@ -1,0 +1,181 @@
+# Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+
+title: "MLOps Resources Deployment"
+Description: "Terraform Script to deploy MLOps resources to OCI"
+informationalText: "Terraform Script to deploy MLOps resources to OCI"
+schemaVersion: 1.1.0
+version: "20220210"
+locale: "en"
+
+variableGroups:
+- title: General Configuration
+  visible: false
+  variables:
+    - compartment_ocid
+    - tenancy_ocid
+    - region
+
+- title: General Configuration
+  visible: true
+  variables:
+    - resource_naming_prefix
+
+- title: Network Configuration
+  visible: true
+  variables:
+    - generic_vcn_cidr_blocks
+    - oke_vcn_cidr_blocks
+    - oke_k8sapiendpoint_subnet_cidr_block
+    - oke_service_lb_subnet_cidr_block
+    - oke_nodepool_cidr_block
+
+
+- title: OKE Cluster Configuration
+  visible: true
+  variables:
+    - kubernetes_version
+    - node_shape
+    - shape_ocpus
+    - shape_mems
+    - image_os_id
+    - ssh_public_key
+
+- title: OCI DevOps Configuration
+  visible: true
+  variables:
+    - email_address
+    - test_ml_model_func_image
+
+variables:
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+    title: "Compartment OCID" 
+    description: "Please select the target compartment"
+
+  tenancy_ocid:
+    type: oci:identity:tenancy:id
+    required: true
+    title: "Tenancy OCID"
+    description: "Please select the target tenancy"
+
+  region:
+    type: oci:identity:region:name
+    required: true
+    title: "Region"
+    description: "Please select the target region"
+
+  resource_naming_prefix:
+    type: string
+    required: true
+    title: "Resource naming prefix"
+    description: "Please input the resource naming prefix for OCI resources"
+
+  generic_vcn_cidr_blocks:
+    type: string
+    required: true
+    title: "Generic VCN CIDR Block"
+    description: "Please input the Generic VCN CIDR Block"
+
+  oke_vcn_cidr_blocks:
+    type: string
+    required: true
+    title: "OKE VCN CIDR Block"
+    description: "Please input the OKE VCN CIDR Block"
+
+  oke_k8sapiendpoint_subnet_cidr_block:
+    type: string
+    required: true
+    title: "OKE API Endpoint Subnet CIDR Block"
+    description: "Please input the OKE API Endpoint Subnet CIDR Block"
+
+  oke_service_lb_subnet_cidr_block:
+    type: string
+    required: true
+    title: "OKE Service Load Balancer Subnet CIDR Block"
+    description: "Please input the OKE Service Load Balancer Subnet CIDR Block"
+
+  oke_nodepool_cidr_block:
+    type: string
+    required: true
+    title: "OKE Node Pool Subnet CIDR Block"
+    description: "Please input the OKE Node Pool Subnet CIDR Block"
+
+  ssh_public_key:
+    title: "SSH Public Key"
+    type: oci:core:ssh:publickey
+    description: "The public SSH key for the key-pair that you want to use, if you wish to login to the instances over SSH"
+    required: true
+
+  kubernetes_version:
+    title: "Kubernetes Version"
+    type: enum
+    description: "Please choose the supported Kubernetes version"
+    default: "v1.21.5"
+    enum:
+      - "v1.21.5"
+      - "v1.20.11"
+      - "v1.20.8"
+      - "v1.19.15"
+
+  node_shape:
+    title: "Node shape"
+    type: oci:core:instanceshape:name
+    description: "Please choose the supported instance shape for the node"
+    dependsOn:      
+       compartmentId: ${compartment_ocid}
+
+  shape_ocpus:
+    title: "Number of OCPUs of each node"
+    type: string
+    description: "Please key in the number of OCPUs"
+
+  shape_mems:
+    title: "Memory of each node in GB"
+    type: string
+    description: "Please key in the amount of memory in GB"
+
+  image_os_id:
+    title: "OS Image OCID of the node pool"
+    type: oci:core:image:id
+    description: "Please choose the supported OS image for the node"
+    dependsOn:      
+       compartmentId: ${compartment_ocid}
+       operatingSystem: "Oracle Linux"
+       operatingSystemVersion: "7.9"
+       shape: ${node_shape}
+
+  email_address:
+    title: "Email address for OCI DevOps Notification"
+    type: string
+    description: "Please provide a valid email address"
+
+  test_ml_model_func_image:
+    title: "Qualified name of the Docker image for the function"
+    type: string
+    description: "Example: phx.ocir.io/ten/functions/function:0.0.1"
+
+
+# outputs:
+#   cluster:
+#     type: string
+#     title: "OKE cluster details"
+#     visible: true
+
+#   flex_node_pool:
+#     type: string
+#     title: "OKE node pool details"
+#     visible: true
+
+#   awx_login_password:
+#     type: string
+#     title: "AWX login Password"
+#     displayText: "AWX UI login password"
+#     visible: true
+
+#   awx_ui_ip:
+#     type: string
+#     title: "AWX UI IP address"
+#     displayText: "AWX UI IP address"
+#     visible: true
