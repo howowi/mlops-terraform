@@ -30,23 +30,6 @@ variableGroups:
     - oke_service_lb_subnet_cidr_block
     - oke_nodepool_cidr_block
 
-
-# - title: OKE Cluster Configuration
-#   visible: true
-#   variables:
-#     - kubernetes_version
-#     - node_shape
-#     - shape_ocpus
-#     - shape_mems
-#     - image_os_id
-#     - ssh_public_key
-
-# - title: OCI DevOps Configuration
-#   visible: true
-#   variables:
-#     - email_address
-#     - test_ml_model_func_image
-
 - title: Functions and Container Registry configuration
   visible: true
   variables:
@@ -113,60 +96,6 @@ variables:
     required: true
     title: "OKE Node Pool Subnet CIDR Block"
     description: "Please input the OKE Node Pool Subnet CIDR Block"
-
-  # ssh_public_key:
-  #   title: "SSH Public Key"
-  #   type: oci:core:ssh:publickey
-  #   description: "The public SSH key for the key-pair that you want to use, if you wish to login to the instances over SSH"
-  #   required: true
-
-  # kubernetes_version:
-  #   title: "Kubernetes Version"
-  #   type: enum
-  #   description: "Please choose the supported Kubernetes version"
-  #   default: "v1.21.5"
-  #   enum:
-  #     - "v1.21.5"
-  #     - "v1.20.11"
-  #     - "v1.20.8"
-  #     - "v1.19.15"
-
-  # node_shape:
-  #   title: "Node shape"
-  #   type: oci:core:instanceshape:name
-  #   description: "Please choose the supported instance shape for the node"
-  #   dependsOn:      
-  #      compartmentId: ${compartment_ocid}
-
-  # shape_ocpus:
-  #   title: "Number of OCPUs of each node"
-  #   type: string
-  #   description: "Please key in the number of OCPUs"
-
-  # shape_mems:
-  #   title: "Memory of each node in GB"
-  #   type: string
-  #   description: "Please key in the amount of memory in GB"
-
-  # image_os_id:
-  #   title: "OS Image OCID of the node pool"
-  #   type: oci:core:image:id
-  #   description: "Please choose the supported OS image for the node"
-  #   dependsOn:      
-  #      compartmentId: ${compartment_ocid}
-  #      operatingSystem: "Oracle Linux"
-  #      operatingSystemVersion: "7.9"
-  #      shape: ${node_shape}
-
-  # email_address:
-  #   title: "Email address for OCI DevOps Notification"
-  #   type: string
-  #   description: "Please provide a valid email address"
-
-  # test_ml_model_func_image:
-  #   title: "Qualified name of the Docker image for the function"
-  #   type: string
-  #   description: "Example: phx.ocir.io/ten/functions/function:0.0.1"
 
   ocir_username:
     title: "Username for OCIR Login"

@@ -60,11 +60,6 @@ variable "resource_naming_prefix" {
   default = "demo"
 }
 
-variable "ssh_public_key" {
-  description = "SSH public key to access node"
-  type        = string
-}
-
 variable "oke_k8sapiendpoint_subnet_cidr_block" {
   description = "Subnet CIDR Block for OKE API Endpoint"
   default = "10.1.0.0/24"
@@ -78,38 +73,6 @@ variable "oke_service_lb_subnet_cidr_block" {
 variable "oke_nodepool_cidr_block" {
   description = "Subnet CIDR Block for worker nodepool"
   default = "10.1.2.0/24"
-}
-
-variable "kubernetes_version" {
-  description = "Kubernetes version"
-}
-
-variable "node_shape" {
-  description = "Instance shape of the node"
-  default = "VM.Standard.E3.Flex"
-}
-
-variable "shape_ocpus" {
-  description = "Number of OCPUs of each node"
-  default = "8"
-}
-
-variable "shape_mems" {
-  description = "Memory of each node in GB"
-  default = "128"
-}
-
-variable "image_os_id" {
-  description = "OS Image OCID of the node pool"
-}
-
-variable "email_address" {
-  description = "Email address for OCI DevOps Notificatio"
-}
-
-variable "test_ml_model_func_image" {
-  description = "Qualified name of the Docker image for the function"
-  default = "lhr.ocir.io/apaccpt01/verify-http-code:0.0.22"
 }
 
 variable "ocir_username" {
