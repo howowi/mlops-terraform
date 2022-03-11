@@ -107,9 +107,16 @@ variable "email_address" {
   description = "Email address for OCI DevOps Notificatio"
 }
 
-variable "test_ml_model_func_image" {
-  description = "Qualified name of the Docker image for the function"
-  default = "lhr.ocir.io/apaccpt01/verify-http-code:0.0.22"
+variable "ocir_url" {
+  description = "URL of OCIR"
+}
+
+variable "ocir_username" {
+  description = "Username for OCIR Login"
+}
+
+variable "ocir_password" {
+  description = "Password for OCIR Login"
 }
 
 data "oci_core_services" "all_services" {

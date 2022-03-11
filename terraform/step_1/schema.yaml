@@ -45,7 +45,13 @@ variableGroups:
   visible: true
   variables:
     - email_address
-    - test_ml_model_func_image
+
+- title: Functions and Container Registry configuration
+  visible: true
+  variables:
+    - ocir_username
+    - ocir_password
+    - ocir_url
 
 variables:
   compartment_ocid:
@@ -151,10 +157,20 @@ variables:
     type: string
     description: "Please provide a valid email address"
 
-  test_ml_model_func_image:
-    title: "Qualified name of the Docker image for the function"
-    type: string
-    description: "Example: phx.ocir.io/ten/functions/function:0.0.1"
+  ocir_url:
+    title: "OCIR URL"
+    type: "string"
+    description: "<region-key>.ocir.io where <region-key> corresponds to the key for the Container Registry region you're using"
+
+  ocir_username:
+    title: "Username for OCIR Login"
+    type: "string"
+    description: "Federated: <tenancy-namespace>/oracleidentitycloudservice/<username>, IAM User: <tenancy-namespace>/<username>"
+
+  ocir_password:
+    title: "Password for OCIR Login"
+    type: password
+    description: "Key in the auth token of your user"
 
 
 # outputs:
