@@ -135,6 +135,6 @@ data oci_identity_availability_domain AD-3 {
   ad_number      = "3"
 }
 
-data oci_objectstorage_namespace namespace {
+data oci_objectstorage_namespace os_namespace {
   compartment_id = var.compartment_ocid
 }
