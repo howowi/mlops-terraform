@@ -23,17 +23,17 @@ resource null_resource build-test-ml-model-func {
 
     provisioner "local-exec" {
         command = "fn build --verbose"
-        working_dir = "src/test-ml-model"
+        working_dir = "../src/test-ml-model"
     }
 
     provisioner "local-exec" {
         command = "image=$(docker images | grep ${oci_artifacts_container_repository.test_mlmodel_function.display_name} | awk -F ' ' '{print $3}') ; docker tag $image ${var.ocir_url}/${data.oci_objectstorage_namespace.os_namespace.namespace}/${oci_artifacts_container_repository.test_mlmodel_function.display_name}:0.0.1"
-        working_dir = "src/test-ml-model"
+        working_dir = "../src/test-ml-model"
     }
 
     provisioner "local-exec" {
         command = "docker push ${var.ocir_url}/${data.oci_objectstorage_namespace.os_namespace.namespace}/${oci_artifacts_container_repository.test_mlmodel_function.display_name}:0.0.1"
-        working_dir = "src/test-ml-model"
+        working_dir = "../src/test-ml-model"
     }
 }
 
@@ -63,16 +63,16 @@ resource null_resource build-trigger-build-func {
 
     provisioner "local-exec" {
         command = "fn build --verbose"
-        working_dir = "src/trigger-build"
+        working_dir = "../src/trigger-build"
     }
 
     provisioner "local-exec" {
         command = "image=$(docker images | grep ${oci_artifacts_container_repository.trigger_build_function.display_name} | awk -F ' ' '{print $3}') ; docker tag $image ${var.ocir_url}/${data.oci_objectstorage_namespace.os_namespace.namespace}/${oci_artifacts_container_repository.trigger_build_function.display_name}:0.0.1"
-        working_dir = "src/trigger-build"
+        working_dir = "../src/trigger-build"
     }
 
     provisioner "local-exec" {
         command = "docker push ${var.ocir_url}/${data.oci_objectstorage_namespace.os_namespace.namespace}/${oci_artifacts_container_repository.trigger_build_function.display_name}:0.0.1"
-        working_dir = "src/trigger-build"
+        working_dir = "../src/trigger-build"
     }
 }
