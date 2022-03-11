@@ -31,21 +31,21 @@ variableGroups:
     - oke_nodepool_cidr_block
 
 
-- title: OKE Cluster Configuration
-  visible: true
-  variables:
-    - kubernetes_version
-    - node_shape
-    - shape_ocpus
-    - shape_mems
-    - image_os_id
-    - ssh_public_key
+# - title: OKE Cluster Configuration
+#   visible: true
+#   variables:
+#     - kubernetes_version
+#     - node_shape
+#     - shape_ocpus
+#     - shape_mems
+#     - image_os_id
+#     - ssh_public_key
 
-- title: OCI DevOps Configuration
-  visible: true
-  variables:
-    - email_address
-    - test_ml_model_func_image
+# - title: OCI DevOps Configuration
+#   visible: true
+#   variables:
+#     - email_address
+#     - test_ml_model_func_image
 
 - title: Functions and Container Registry configuration
   visible: true
