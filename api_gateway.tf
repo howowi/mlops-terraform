@@ -1,11 +1,9 @@
 ## API Gateway ##
 
-# resource oci_apigateway_gateway export_MLOpsV1 {
+# resource oci_apigateway_gateway test-ml-model-api-gw {
 #   compartment_id = var.compartment_ocid
-#   display_name  = "MLOpsV1"
+#   display_name  = "test-ml-model-api-gw"
 #   endpoint_type = "PUBLIC"
-#   network_security_group_ids = [
-#   ]
 #   response_cache_details {
 #     #authentication_secret_id = <<Optional value not found in discovery>>
 #     #authentication_secret_version_number = <<Optional value not found in discovery>>
