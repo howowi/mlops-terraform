@@ -15,6 +15,7 @@ variableGroups:
     - compartment_ocid
     - tenancy_ocid
     - region
+    - region_key
 
 - title: General Configuration
   visible: true
@@ -69,6 +70,12 @@ variables:
     type: oci:identity:region:name
     required: true
     title: "Region"
+    description: "Please select the target region"
+
+  region_key:
+    type: oci:identity:region:key
+    required: true
+    title: Region Key"
     description: "Please select the target region"
 
   resource_naming_prefix:
