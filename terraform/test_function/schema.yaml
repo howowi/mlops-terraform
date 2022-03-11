@@ -10,7 +10,7 @@ locale: "en"
 
 variableGroups:
 - title: General Configuration
-  visible: true
+  visible: false
   variables:
     - compartment_ocid
     - tenancy_ocid
