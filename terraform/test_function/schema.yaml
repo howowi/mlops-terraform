@@ -15,7 +15,6 @@ variableGroups:
     - compartment_ocid
     - tenancy_ocid
     - region
-    - region_key
 
 - title: General Configuration
   visible: true
@@ -48,10 +47,11 @@ variableGroups:
     - email_address
     - test_ml_model_func_image
 
-# - title: Functions and Container Registry configuration
-#   visible: true
-#   variables:
-#     - 
+- title: Functions and Container Registry configuration
+  visible: true
+  variables:
+    - ocir_username
+    - ocir_password
 
 variables:
   compartment_ocid:
@@ -171,8 +171,12 @@ variables:
   ocir_username:
     title: "Username for OCIR Login"
     type: "string"
-    description: ""
+    description: "Federated: <tenancy-namespace>/oracleidentitycloudservice/<username>, IAM User: <tenancy-namespace>/<username>"
 
+  ocir_password:
+    title: "Password for OCIR Login"
+    type: password
+    description: "Key in the auth token of your user"
 
 # outputs:
 #   cluster:

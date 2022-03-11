@@ -16,7 +16,7 @@ resource oci_functions_application test-ml-model-func-app {
 
 resource null_resource ocir-login {
     provisioner "local-exec" {
-        command = "docker login ${var.ocir_repo} -u ${var.ocir_username} -p ${var.ocir_user_password} "
+        command = "docker login ${data.oci_identity_regions.region_key.key}.ocir.io -u ${var.ocir_username} -p ${var.ocir_password} "
     }
 }
 

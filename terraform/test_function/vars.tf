@@ -112,6 +112,14 @@ variable "test_ml_model_func_image" {
   default = "lhr.ocir.io/apaccpt01/verify-http-code:0.0.22"
 }
 
+variable "ocir_username" {
+  description = "Username for OCIR Login"
+}
+
+variable "ocir_password" {
+  description = "Password for OCIR Login"
+}
+
 data "oci_core_services" "all_services" {
 }
 
@@ -130,4 +138,7 @@ data oci_identity_availability_domain AD-3 {
 
 data oci_objectstorage_namespace namespace {
   compartment_id = var.compartment_ocid
+}
+
+data oci_identity_regions region_key {
 }
