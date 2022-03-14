@@ -34,3 +34,16 @@ resource "null_resource" "create_ocir_secret" {
   }
 }
 
+resource "null_resource" "deploy_ml_service" {
+    depends_on = [null_resource.create_ocir_secret]
+    provisioner "local-exec" {
+        command = "kubectl apply -f deploy/deploy-ml-model.yml"
+    }
+}
+
+resource "null_resource" "get_model_ip" {
+    depends_on = [null_resource.deploy_ml_service]
+    provisioner "local-exec" {
+        command = "kubectle get svc ml-model-service -n ml-model | awk -F ' ' '{print $3}' > data/model.api.txt"
+    }
+}
