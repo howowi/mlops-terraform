@@ -7,6 +7,7 @@ resource "null_resource" "create_kubeconfig_directory" {
 }
 
 resource "null_resource" "create_kubeconfig" {
+    depends_on = [null_resource.create_kubeconfig_directory]
     provisioner "local-exec" {
         command = "oci ce cluster create-kubeconfig --cluster-id ${oci_containerengine_cluster.test-oke-cluster.id} --file $HOME/.kube/config --region ${var.region} --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT"
     }
@@ -19,21 +20,17 @@ resource "null_resource" "set_kubeconfig_env" {
     }
 }
 
-
-
-resource kubernetes_secret ocir_secret {
-  metadata {
-    name = "ocir-secret"
-    namespace = "ml-model"
-  }
-  data = {
-    ".dockerconfigjson" = jsonencode({
-      auths = {
-        "${var.ocir_url}" = {
-          auth = "${base64encode("${var.ocir_username}:'${var.ocir_password}'")}"
-        }
-      }
-    })
-  }
-  type = "kubernetes.io/dockerconfigjson"
+resource "null_resource" "create_namespace" {
+    depends_on = [null_resource.set_kubeconfig_env]
+    provisioner "local-exec" {
+        command = "kubectl create namespace ml-model"
+    }
 }
+
+resource "null_resource" "create_ocir_secret" {
+  depends_on = [null_resource.create_namespace]
+  provisioner "local-exec" {
+    command = "kubectl create secret docker-registry ocir-secret --docker-username='${var.ocir_username}' --docker-password='${var.ocir_password}' --docker-server=${var.ocir_url} --docker-email='${var.ocir_email}' -n ml-model"
+  }
+}
+

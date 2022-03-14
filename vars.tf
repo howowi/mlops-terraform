@@ -119,6 +119,10 @@ variable "ocir_password" {
   description = "Password for OCIR Login"
 }
 
+variable "ocir_email" {
+  description = "Email for OCIR Login"
+}
+
 data "oci_core_services" "all_services" {
 }
 

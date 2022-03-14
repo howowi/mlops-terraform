@@ -52,6 +52,7 @@ variableGroups:
     - ocir_username
     - ocir_password
     - ocir_url
+    - ocir_email
 
 variables:
   compartment_ocid:
@@ -171,6 +172,11 @@ variables:
     title: "Password for OCIR Login"
     type: password
     description: "Key in the auth token of your user"
+
+  ocir_email:
+    title: "Email for OCIR Login"
+    type: string
+    description: "Key in your email address"
 
 
 # outputs:
