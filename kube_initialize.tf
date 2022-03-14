@@ -44,6 +44,11 @@ resource "null_resource" "deploy_ml_service" {
 resource "null_resource" "get_model_ip" {
     depends_on = [null_resource.deploy_ml_service]
     provisioner "local-exec" {
-        command = "kubectle get svc ml-model-service -n ml-model | awk -F ' ' '{print $3}' > data/model.api.txt"
+        command = "kubectle get svc ml-model-service -n ml-model | awk -F ' ' '{print $3}' > data/model_ip.txt"
     }
+}
+
+data "local-file" "model_ip" {
+    depends_on = [null_resource.get_model_ip]
+    filename = "data/model_ip.txt" 
 }
