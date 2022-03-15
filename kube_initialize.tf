@@ -136,3 +136,11 @@ data "local_file" "prod_model_ip" {
     depends_on = [null_resource.get_model_ip_prod]
     filename = "data/prod_model_ip.txt" 
 }
+
+output "prod_model_ip" {
+    value = data.local_file.prod_model_ip.content
+}
+
+output "test_model_ip" {
+    value = data.local_file.test_model_ip.content
+}
