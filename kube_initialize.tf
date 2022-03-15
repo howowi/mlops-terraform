@@ -160,11 +160,11 @@ resource "null_resource" "get_url_test" {
 }
 
 data "local_file" "prod_model_predict_url" {
-    depends_on = [null_resource.get_model_ip_test]
+    depends_on = [null_resource.get_model_ip_prod]
     filename = "data/prod_model_predict_url.txt" 
 }
 
 data "local_file" "prod_model_health_url" {
-    depends_on = [null_resource.get_model_ip_test]
+    depends_on = [null_resource.get_model_ip_prod]
     filename = "data/prod_model_health_url.txt"
 }
