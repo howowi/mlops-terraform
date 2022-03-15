@@ -184,3 +184,7 @@ output "test_model_predict_url" {
 output "test_model_health_url" {
     value = data.local_file.test_model_health_url.content
 }
+
+output "prod_api_gw_name" {
+    value = oci_apigateway_gateway.prod-ml-model-api-gw.id
+}
