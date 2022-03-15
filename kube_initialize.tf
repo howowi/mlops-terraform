@@ -63,7 +63,7 @@ resource "null_resource" "get_model_ip_test" {
     }
     depends_on = [null_resource.deploy_ml_service_test, null_resource.check_context_test]
     provisioner "local-exec" {
-        command = "TEST_MODEL_IP=$(kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}') && echo 'http://'$TEST_MODEL_IP':8080/predict' > data/test_model_predict_url.txt && echo 'http://'$TEST_MODEL_IP':8080/health' > data/test_model_health_url.txt"
+        command = "TEST_MODEL_IP=$(kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}') && echo -n 'http://'$TEST_MODEL_IP':8080/predict' > data/test_model_predict_url.txt && echo -n 'http://'$TEST_MODEL_IP':8080/health' > data/test_model_health_url.txt"
         interpreter = [ "/bin/bash","-c"]
     }
 }
@@ -132,7 +132,7 @@ resource "null_resource" "get_model_ip_prod" {
     }
     depends_on = [null_resource.deploy_ml_service_prod, null_resource.check_context_prod]
     provisioner "local-exec" {
-        command = "PROD_MODEL_IP=$(kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}') && echo 'http://'$PROD_MODEL_IP':8080/predict' > data/prod_model_predict_url.txt && echo 'http://'$PROD_MODEL_IP':8080/health' > data/prod_model_health_url.txt"
+        command = "PROD_MODEL_IP=$(kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}') && echo -n 'http://'$PROD_MODEL_IP':8080/predict' > data/prod_model_predict_url.txt && echo -n 'http://'$PROD_MODEL_IP':8080/health' > data/prod_model_health_url.txt"
         interpreter = [ "/bin/bash","-c"]
     }
 }
@@ -183,8 +183,4 @@ output "test_model_predict_url" {
 
 output "test_model_health_url" {
     value = data.local_file.test_model_health_url.content
-}
-
-output "prod_api_gw_name" {
-    value = oci_apigateway_gateway.prod-ml-model-api-gw.id
 }
