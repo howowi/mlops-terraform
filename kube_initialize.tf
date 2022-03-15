@@ -48,7 +48,7 @@ resource "null_resource" "get_model_ip_test" {
     }
 }
 
-data "local-file" "test_model_ip" {
+data "local_file" "test_model_ip" {
     depends_on = [null_resource.get_model_ip_test]
     filename = "data/test_model_ip.txt" 
 }
@@ -103,7 +103,7 @@ resource "null_resource" "get_model_ip_prod" {
     }
 }
 
-data "local-file" "prod_model_ip" {
+data "local_file" "prod_model_ip" {
     depends_on = [null_resource.get_model_ip_prod]
     filename = "data/prod_model_ip.txt" 
 }
