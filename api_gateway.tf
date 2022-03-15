@@ -1,25 +1,24 @@
 ## API Gateway ##
 
-resource oci_apigateway_gateway export_prod-ml-model-api-gw {
+resource oci_apigateway_gateway prod-ml-model-api-gw {
   compartment_id = var.compartment_ocid
-  display_name  = "prod-ml-model-api-gw"
+  display_name  = "${var.resource_naming_prefix}-prod-ml-model-api-gw"
   endpoint_type = "PUBLIC"
-  subnet_id = oci_core_subnet.export_api-gw-public-subnet.id
+  subnet_id = oci_core_subnet.mlops-public-subnet.id
 }
 
-resource oci_apigateway_gateway export_test-ml-model-api-gw {
+resource oci_apigateway_gateway test-ml-model-api-gw {
   compartment_id = var.compartment_ocid
-  display_name  = "test-ml-model-api-gw"
+  display_name  = "${var.resource_naming_prefix}-test-ml-model-api-gw"
   endpoint_type = "PUBLIC"
-  subnet_id = oci_core_subnet.export_api-gw-public-subnet.id
+  subnet_id = oci_core_subnet.mlops-public-subnet.id
 }
 
-resource oci_apigateway_deployment export_prod-ml-model {
+resource oci_apigateway_deployment prod-ml-model {
+  depends_on = [local-file.prod_model_ip]
   compartment_id = var.compartment_ocid
-  display_name = "prod-ml-model"
-  freeform_tags = {
-  }
-  gateway_id  = oci_apigateway_gateway.export_prod-ml-model-api-gw.id
+  display_name = "${var.resource_naming_prefix}-prod-ml-model-api"
+  gateway_id  = oci_apigateway_gateway.prod-ml-model-api-gw.id
   path_prefix = "/v1"
   specification {
     logging_policies {
@@ -35,7 +34,7 @@ resource oci_apigateway_deployment export_prod-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://152.70.155.149:8080/predict"
+        url  = "http://${data.local-file.prod_model_ip.content}:8080/predict"
       }
       methods = [
         "ANY",
@@ -49,7 +48,7 @@ resource oci_apigateway_deployment export_prod-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://152.70.155.149:8080/health"
+        url  = "http://${data.local-file.prod_model_ip.content}:8080/health"
       }
       methods = [
         "ANY",
@@ -59,10 +58,10 @@ resource oci_apigateway_deployment export_prod-ml-model {
   }
 }
 
-resource oci_apigateway_deployment export_test-ml-model {
+resource oci_apigateway_deployment test-ml-model {
   compartment_id = var.compartment_ocid
-  display_name = "test-ml-model"
-  gateway_id  = oci_apigateway_gateway.export_test-ml-model-api-gw.id
+  display_name = "${var.resource_naming_prefix}-test-ml-model-api"
+  gateway_id  = oci_apigateway_gateway.test-ml-model-api-gw.id
   path_prefix = "/v1"
   specification {
     logging_policies {
@@ -78,7 +77,7 @@ resource oci_apigateway_deployment export_test-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://152.70.129.30:8080/predict"
+        url  = "http://${data.local-file.test_model_ip.content}:8080/predict"
       }
       methods = [
         "ANY",
@@ -92,7 +91,7 @@ resource oci_apigateway_deployment export_test-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://152.70.129.30:8080/health"
+        url  = "http://${data.local-file.test_model_ip.content}:8080/health"
       }
       methods = [
         "ANY",
