@@ -56,6 +56,7 @@ data "local_file" "test_model_ip" {
 ## Initialize Prod Kubernetes Cluster ##
 
 resource "null_resource" "move_test_kubeconfig" {
+    depends_on = [null_resource.get_model_ip_test]
     provisioner "local-exec" {
         command = "mv $HOME/.kube/config $HOME/.kube/test_config_backup"
     }
