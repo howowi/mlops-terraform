@@ -137,6 +137,28 @@ resource "null_resource" "get_model_ip_prod" {
     }
 }
 
+resource "null_resource" "get_url_prod" {
+    triggers  =  { 
+        always_run = "${timestamp()}" 
+    }
+    depends_on = [null_resource.get_model_ip_prod]
+    provisioner "local-exec" {
+        command = "cat data/prod_model_predict_url.txt && cat data/prod_model_health_url.txt"
+        interpreter = [ "/bin/bash","-c"]
+    }
+}
+
+resource "null_resource" "get_url_test" {
+    triggers  =  { 
+        always_run = "${timestamp()}" 
+    }
+    depends_on = [null_resource.get_model_ip_test]
+    provisioner "local-exec" {
+        command = "cat data/test_model_predict_url.txt && cat data/test_model_health_url.txt"
+        interpreter = [ "/bin/bash","-c"]
+    }
+}
+
 data "local_file" "prod_model_predict_url" {
     depends_on = [null_resource.get_model_ip_test]
     filename = "data/prod_model_predict_url.txt" 
