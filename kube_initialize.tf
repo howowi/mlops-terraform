@@ -9,14 +9,14 @@ resource "null_resource" "create_kubeconfig_directory" {
 resource "null_resource" "create_kubeconfig_test" {
     depends_on = [null_resource.create_kubeconfig_directory]
     provisioner "local-exec" {
-        command = "oci ce cluster create-kubeconfig --cluster-id ${oci_containerengine_cluster.test-oke-cluster.id} --file $HOME/.kube/config --region ${var.region} --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT"
+        command = "oci ce cluster create-kubeconfig --cluster-id ${oci_containerengine_cluster.test-oke-cluster.id} --file $HOME/.kube/config_test --region ${var.region} --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT"
     }
 }
 
 resource "null_resource" "set_kubeconfig_env_test" {
     depends_on = [null_resource.create_kubeconfig_test]
     provisioner "local-exec" {
-        command = "export KUBECONFIG=$HOME/.kube/config"
+        command = "export KUBECONFIG=$HOME/.kube/config_test"
     }
 }
 
@@ -55,24 +55,24 @@ data "local_file" "test_model_ip" {
 
 ## Initialize Prod Kubernetes Cluster ##
 
-resource "null_resource" "move_test_kubeconfig" {
-    depends_on = [null_resource.get_model_ip_test]
-    provisioner "local-exec" {
-        command = "mv $HOME/.kube/config $HOME/.kube/test_config_backup"
-    }
-}
+# resource "null_resource" "move_test_kubeconfig" {
+#     depends_on = [null_resource.get_model_ip_test]
+#     provisioner "local-exec" {
+#         command = "mv $HOME/.kube/config $HOME/.kube/test_config_backup"
+#     }
+# }
 
 resource "null_resource" "create_kubeconfig_prod" {
     depends_on = [null_resource.move_test_kubeconfig]
     provisioner "local-exec" {
-        command = "oci ce cluster create-kubeconfig --cluster-id ${oci_containerengine_cluster.prod-oke-cluster.id} --file $HOME/.kube/config --region ${var.region} --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT"
+        command = "oci ce cluster create-kubeconfig --cluster-id ${oci_containerengine_cluster.prod-oke-cluster.id} --file $HOME/.kube/config_prod --region ${var.region} --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT"
     }
 }
 
 resource "null_resource" "set_kubeconfig_env_prod" {
     depends_on = [null_resource.create_kubeconfig_prod]
     provisioner "local-exec" {
-        command = "export KUBECONFIG=$HOME/.kube/config"
+        command = "export KUBECONFIG=$HOME/.kube/config_prod"
     }
 }
 
