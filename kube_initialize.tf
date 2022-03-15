@@ -170,17 +170,17 @@ data "local_file" "prod_model_health_url" {
 }
 
 output "prod_model_predict_url" {
-    value = data.local_file.prod_model_predict_url
+    value = data.local_file.prod_model_predict_url.content
 }
 
 output "prod_model_health_url" {
-    value = data.local_file.prod_model_health_url
+    value = data.local_file.prod_model_health_url.content
 }
 
 output "test_model_predict_url" {
-    value = data.local_file.test_model_predict_url
+    value = data.local_file.test_model_predict_url.content
 }
 
 output "test_model_health_url" {
-    value = data.local_file.test_model_health_url
+    value = data.local_file.test_model_health_url.content
 }
