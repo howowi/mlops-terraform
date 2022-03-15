@@ -16,7 +16,7 @@ resource oci_datascience_notebook_session mlops_bank_loan_notebook {
   notebook_session_configuration_details {
     block_storage_size_in_gbs = "1000"
     shape     = "VM.Standard2.8"
-    subnet_id = oci_core_subnet.mlops-public-subnet.id
+    # subnet_id = oci_core_subnet.mlops-public-subnet.id
   }
   project_id = oci_datascience_project.mlops-datascience-proj.id
   state      = "ACTIVE"
