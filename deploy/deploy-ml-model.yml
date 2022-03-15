@@ -10,7 +10,7 @@ spec:
   - port: 8080
   selector:
     app: ml-model
----
+# ---
 # apiVersion: apps/v1
 # kind: Deployment
 # metadata:
