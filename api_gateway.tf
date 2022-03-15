@@ -15,7 +15,6 @@ resource oci_apigateway_gateway test-ml-model-api-gw {
 }
 
 resource oci_apigateway_deployment prod-ml-model {
-  depends_on = [data.local_file.prod_model_ip, null_resource.check_data_output_prod]
   compartment_id = var.compartment_ocid
   display_name = "${var.resource_naming_prefix}-prod-ml-model-api"
   gateway_id  = oci_apigateway_gateway.prod-ml-model-api-gw.id
@@ -59,7 +58,6 @@ resource oci_apigateway_deployment prod-ml-model {
 }
 
 resource oci_apigateway_deployment test-ml-model {
-  depends_on = [data.local_file.test_model_ip, null_resource.check_data_output_test]
   compartment_id = var.compartment_ocid
   display_name = "${var.resource_naming_prefix}-test-ml-model-api"
   gateway_id  = oci_apigateway_gateway.test-ml-model-api-gw.id
