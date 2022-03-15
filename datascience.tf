@@ -13,11 +13,10 @@ resource oci_datascience_project mlops-datascience-proj {
 resource oci_datascience_notebook_session mlops_bank_loan_notebook {
   compartment_id = var.compartment_ocid
   display_name = "MLOps_Bank_Loan_Approval"
-  notebook_session_configuration_details {
+  project_id = oci_datascience_project.mlops-datascience-proj.id
+  notebook_session_config_details {
     block_storage_size_in_gbs = "1000"
     shape     = "VM.Standard2.8"
     # subnet_id = oci_core_subnet.mlops-public-subnet.id
   }
-  project_id = oci_datascience_project.mlops-datascience-proj.id
-  state      = "ACTIVE"
 }
