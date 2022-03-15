@@ -1,27 +1,5 @@
 ## API Gateway ##
 
-resource "null_resource" "check_data_output_test" {
-  depends_on = [null_resource.get_model_ip_test]
-    triggers  =  { 
-        always_run = "${timestamp()}" 
-    }
-    provisioner "local-exec" {
-        command = "cat data/test_model_ip.txt"
-        interpreter = [ "/bin/bash","-c"]
-    }
-}
-
-resource "null_resource" "check_data_output_prod" {
-  depends_on = [null_resource.get_model_ip_prod]
-    triggers  =  { 
-        always_run = "${timestamp()}" 
-    }
-    provisioner "local-exec" {
-        command = "cat data/prod_model_ip.txt"
-        interpreter = [ "/bin/bash","-c"]
-    }
-}
-
 resource oci_apigateway_gateway prod-ml-model-api-gw {
   compartment_id = var.compartment_ocid
   display_name  = "${var.resource_naming_prefix}-prod-ml-model-api-gw"
@@ -56,7 +34,7 @@ resource oci_apigateway_deployment prod-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local_file.prod_model_ip.content}:8080/predict"
+        url  = data.local_file.prod_model_predict_url.content
       }
       methods = [
         "ANY",
@@ -70,7 +48,7 @@ resource oci_apigateway_deployment prod-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local_file.prod_model_ip.content}:8080/health"
+        url  = data.local_file.prod_model_health_url.content
       }
       methods = [
         "ANY",
@@ -100,7 +78,7 @@ resource oci_apigateway_deployment test-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local_file.test_model_ip.content}:8080/predict"
+        url  = data.local_file.test_model_predict_url.content
       }
       methods = [
         "ANY",
@@ -114,7 +92,7 @@ resource oci_apigateway_deployment test-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local_file.test_model_ip.content}:8080/health"
+        url  = data.local_file.test_model_health_url.content
       }
       methods = [
         "ANY",

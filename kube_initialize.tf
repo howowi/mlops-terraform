@@ -63,14 +63,19 @@ resource "null_resource" "get_model_ip_test" {
     }
     depends_on = [null_resource.deploy_ml_service_test, null_resource.check_context_test]
     provisioner "local-exec" {
-        command = "kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}' > data/test_model_ip.txt"
+        command = "TEST_MODEL_IP=$(kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}') && echo 'http://'$TEST_MODEL_IP':8080/predict' > data/test_model_predict_url.txt && echo 'http://'$TEST_MODEL_IP':8080/health' > data/test_model_health_url.txt"
         interpreter = [ "/bin/bash","-c"]
     }
 }
 
-data "local_file" "test_model_ip" {
+data "local_file" "test_model_predict_url" {
     depends_on = [null_resource.get_model_ip_test]
-    filename = "data/test_model_ip.txt" 
+    filename = "data/test_model_predict_url.txt" 
+}
+
+data "local_file" "test_model_health_url" {
+    depends_on = [null_resource.get_model_ip_test]
+    filename = "data/test_model_health_url.txt"
 }
 
 ## Initialize Prod Kubernetes Cluster ##
@@ -127,20 +132,17 @@ resource "null_resource" "get_model_ip_prod" {
     }
     depends_on = [null_resource.deploy_ml_service_prod, null_resource.check_context_prod]
     provisioner "local-exec" {
-        command = "kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}' > data/prod_model_ip.txt"
+        command = "PROD_MODEL_IP=$(kubectl get svc ml-model-service -n ml-model --no-headers=true | awk -F ' ' '{print $3}') && echo 'http://'$PROD_MODEL_IP':8080/predict' > data/prod_model_predict_url.txt && echo 'http://'$PROD_MODEL_IP':8080/health' > data/prod_model_health_url.txt"
         interpreter = [ "/bin/bash","-c"]
     }
 }
 
-data "local_file" "prod_model_ip" {
-    depends_on = [null_resource.get_model_ip_prod]
-    filename = "data/prod_model_ip.txt" 
+data "local_file" "prod_model_predict_url" {
+    depends_on = [null_resource.get_model_ip_test]
+    filename = "data/prod_model_predict_url.txt" 
 }
 
-output "prod_model_ip" {
-    value = data.local_file.prod_model_ip.content
-}
-
-output "test_model_ip" {
-    value = data.local_file.test_model_ip.content
+data "local_file" "prod_model_health_url" {
+    depends_on = [null_resource.get_model_ip_test]
+    filename = "data/prod_model_health_url.txt"
 }
