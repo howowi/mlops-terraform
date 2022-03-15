@@ -34,7 +34,7 @@ resource oci_apigateway_deployment prod-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local-file.prod_model_ip.content}:8080/predict"
+        url  = "http://${data.local_file.prod_model_ip.content}:8080/predict"
       }
       methods = [
         "ANY",
@@ -48,7 +48,7 @@ resource oci_apigateway_deployment prod-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local-file.prod_model_ip.content}:8080/health"
+        url  = "http://${data.local_file.prod_model_ip.content}:8080/health"
       }
       methods = [
         "ANY",
@@ -77,7 +77,7 @@ resource oci_apigateway_deployment test-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local-file.test_model_ip.content}:8080/predict"
+        url  = "http://${data.local_file.test_model_ip.content}:8080/predict"
       }
       methods = [
         "ANY",
@@ -91,7 +91,7 @@ resource oci_apigateway_deployment test-ml-model {
         read_timeout_in_seconds = "10"
         send_timeout_in_seconds = "10"
         type = "HTTP_BACKEND"
-        url  = "http://${data.local-file.test_model_ip.content}:8080/health"
+        url  = "http://${data.local_file.test_model_ip.content}:8080/health"
       }
       methods = [
         "ANY",
