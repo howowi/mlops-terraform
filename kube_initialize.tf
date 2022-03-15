@@ -63,7 +63,7 @@ data "local_file" "test_model_ip" {
 # }
 
 resource "null_resource" "create_kubeconfig_prod" {
-    depends_on = [null_resource.move_test_kubeconfig]
+    depends_on = [null_resource.get_model_ip_test]
     provisioner "local-exec" {
         command = "oci ce cluster create-kubeconfig --cluster-id ${oci_containerengine_cluster.prod-oke-cluster.id} --file $HOME/.kube/config_prod --region ${var.region} --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT"
     }
