@@ -249,3 +249,9 @@ outputs:
     title: "ID of auth token vault secret"
     displayText: "ID of auth token vault secret"
     visible: true
+  
+  apex-url:
+    type: string
+    title: "URL of APEX instance"
+    displayText: "URL of APEX instance"
+    visible: true
