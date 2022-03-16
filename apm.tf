@@ -16,7 +16,7 @@ resource oci_apm_synthetics_monitor test-ml-model-monitor {
     vantage_points = ["OraclePublic-ap-sydney-1", "OraclePublic-ap-singapore-1", "OraclePublic-us-phoenix-1" ]
 
     configuration {
-        # config_type = var.monitor_configuration_config_type
+        config_type = "REST"
         is_certificate_validation_enabled = "false"
         is_failure_retried = "true"
         is_redirection_enabled = "false"
