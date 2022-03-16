@@ -55,6 +55,12 @@ variableGroups:
     - ocir_url
     - ocir_email
 
+- title: Oracle Analytics Cloud
+  visible: true
+  variables:
+    - create_oac
+    - idsc_access_token
+
 variables:
   compartment_ocid:
     type: oci:identity:compartment:id
@@ -195,6 +201,18 @@ variables:
     type: string
     description: "Key in your email address"
 
+  create_oac:
+    title: "Create OAC Instance in this stack? Otherwise create manually."
+    type: boolean
+    required: true
+    default: false
+
+  idsc_access_token:
+    title: "IDSC Access Token for OAC"
+    type: password
+    required: false
+    description: "Obtain Access Token from IDSC"
+    visible: create_oac
 
 outputs:
   prod-ml-model-endpoint:

@@ -127,6 +127,15 @@ variable "ocir_email" {
   description = "Email for OCIR Login"
 }
 
+variable "create_oac" {
+  description = "create OAC"
+  type = bool
+}
+
+variable "idsc_access_token" {
+  description = "IDSC Access Token for OAC"
+}
+
 data "oci_core_services" "all_services" {
 }
 
