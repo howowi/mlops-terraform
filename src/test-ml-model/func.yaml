@@ -1,6 +1,10 @@
 schema_version: 20180708
 name: test-ml-model
+<<<<<<< HEAD
 version: 0.0.1
+=======
+version: 0.0.50
+>>>>>>> 7dfb0ccc4ef5e02bd222726e00143b0050fb7f1c
 runtime: python
 build_image: fnproject/python:3.8-dev
 run_image: fnproject/python:3.8

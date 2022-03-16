@@ -10,7 +10,7 @@ locale: "en"
 
 variableGroups:
 - title: General Configuration
-  visible: true
+  visible: false
   variables:
     - compartment_ocid
     - tenancy_ocid
@@ -45,26 +45,7 @@ variableGroups:
   visible: true
   variables:
     - email_address
-
-- title: Functions and Container Registry Configuration
-  visible: true
-  variables:
-    - ocir_username
-    - ocir_password
-    - ocir_password_base64
-    - ocir_url
-    - ocir_email
-
-- title: Oracle Analytics Cloud
-  visible: true
-  variables:
-    - create_oac
-    - idsc_access_token
-
-- title: Autonomous Database and APEX Configuration
-  visible: true
-  variables:
-    - mlops_adb_admin_password
+    - test_ml_model_func_image
 
 variables:
   compartment_ocid:
@@ -129,7 +110,6 @@ variables:
 
   kubernetes_version:
     title: "Kubernetes Version"
-    required: true
     type: enum
     description: "Please choose the supported Kubernetes version"
     default: "v1.21.5"
@@ -141,7 +121,6 @@ variables:
 
   node_shape:
     title: "Node shape"
-    required: true
     type: oci:core:instanceshape:name
     description: "Please choose the supported instance shape for the node"
     dependsOn:      
@@ -149,19 +128,16 @@ variables:
 
   shape_ocpus:
     title: "Number of OCPUs of each node"
-    required: true
     type: string
     description: "Please key in the number of OCPUs"
 
   shape_mems:
     title: "Memory of each node in GB"
-    required: true
     type: string
     description: "Please key in the amount of memory in GB"
 
   image_os_id:
     title: "OS Image OCID of the node pool"
-    required: true
     type: oci:core:image:id
     description: "Please choose the supported OS image for the node"
     dependsOn:      
@@ -172,86 +148,34 @@ variables:
 
   email_address:
     title: "Email address for OCI DevOps Notification"
-    required: true
     type: string
     description: "Please provide a valid email address"
 
-  ocir_url:
-    title: "OCIR URL"
-    required: true
-    type: "string"
-    description: "<region-key>.ocir.io where <region-key> corresponds to the key for the Container Registry region you're using"
-
-  ocir_username:
-    title: "Username for OCIR Login"
-    required: true
-    type: "string"
-    description: "Federated: <tenancy-namespace>/oracleidentitycloudservice/<username>, IAM User: <tenancy-namespace>/<username>"
-
-  ocir_password:
-    title: "Password for OCIR Login"
-    required: true
-    type: password
-    description: "Key in the auth token of your user"
-
-  ocir_password_base64:
-    title: "Base64 Password for OCIR Login"
-    required: true
-    type: password
-    description: "Key in the Base64-encoded auth token of your user"
-
-  ocir_email:
-    title: "Email for OCIR Login"
-    required: true
+  test_ml_model_func_image:
+    title: "Qualified name of the Docker image for the function"
     type: string
-    description: "Key in your email address"
+    description: "Example: phx.ocir.io/ten/functions/function:0.0.1"
 
-  create_oac:
-    title: "Create OAC Instance in this stack? Otherwise create manually."
-    type: boolean
-    required: true
-    default: false
 
-  idsc_access_token:
-    title: "IDSC Access Token for OAC"
-    type: password
-    required: false
-    description: "Obtain Access Token from IDSC"
-    visible: create_oac
+# outputs:
+#   cluster:
+#     type: string
+#     title: "OKE cluster details"
+#     visible: true
 
-  mlops_adb_admin_password:
-    title: "ADB Admin Password"
-    type: password
-    required: true
-    description: "Password for ADB Admin"
+#   flex_node_pool:
+#     type: string
+#     title: "OKE node pool details"
+#     visible: true
 
-outputs:
-  prod-ml-model-endpoint:
-    type: string
-    title: "Prod ML Model Endpoint"
-    displayText: "Prod ML Model Endpoint"
-    visible: true
+#   awx_login_password:
+#     type: string
+#     title: "AWX login Password"
+#     displayText: "AWX UI login password"
+#     visible: true
 
-  test-ml-model-endpoint:
-    type: string
-    title: "Test ML Model Endpoint"
-    displayText: "Test ML Model Endpoint"
-    visible: true
-
-  devops-code-repo-url:
-    type: string
-    title: "Code Repo URL"
-    displayText: "Code Repo URL"
-    visible: true
-
-  container-reg-auth-token-id:
-    type: string
-    title: "ID of auth token vault secret"
-    displayText: "ID of auth token vault secret"
-    visible: true
-  
-  apex-url:
-    type: string
-    title: "URL of APEX instance"
-    displayText: "URL of APEX instance"
-    visible: true
+#   awx_ui_ip:
+#     type: string
+#     title: "AWX UI IP address"
+#     displayText: "AWX UI IP address"
+#     visible: true
