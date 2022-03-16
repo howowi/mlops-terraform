@@ -17,7 +17,7 @@ resource oci_database_autonomous_database mlops-adb-apex {
     is_dedicated                = "false"
     is_free_tier                = "false"
     is_mtls_connection_required = "true"
-    kms_key_id    = "ORACLE_MANAGED_KEY"
+    # kms_key_id    = "ORACLE_MANAGED_KEY"
     license_model = "LICENSE_INCLUDED"
     open_mode                  = "READ_WRITE"
     operations_insights_status = "NOT_ENABLED"
