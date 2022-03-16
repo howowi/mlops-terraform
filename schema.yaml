@@ -51,6 +51,7 @@ variableGroups:
   variables:
     - ocir_username
     - ocir_password
+    - ocir_password_base64
     - ocir_url
     - ocir_email
 
@@ -172,6 +173,11 @@ variables:
     title: "Password for OCIR Login"
     type: password
     description: "Key in the auth token of your user"
+
+  ocir_password_base64:
+    title: "Base64 Password for OCIR Login"
+    type: password
+    description: "Key in the Base64-encoded auth token of your user"
 
   ocir_email:
     title: "Email for OCIR Login"

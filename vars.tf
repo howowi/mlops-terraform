@@ -119,6 +119,10 @@ variable "ocir_password" {
   description = "Password for OCIR Login"
 }
 
+variable "ocir_password_base64" {
+  description = "Base64-encoded Password for OCIR Login"
+}
+
 variable "ocir_email" {
   description = "Email for OCIR Login"
 }
