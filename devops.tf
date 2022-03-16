@@ -70,7 +70,7 @@ resource "oci_devops_deploy_pipeline" "mlops-deploy-pipeline" {
         }
         items {
             name = "bucket"
-            default_value = "ml-model-test-datasets"
+            default_value = oci_objectstorage_bucket.ml-model-test-datasets.name
             description = "Object Storage bucket that contains datasets for testing"
         }
         items {
