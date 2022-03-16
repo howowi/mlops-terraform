@@ -168,19 +168,3 @@ data "local_file" "prod_model_health_url" {
     depends_on = [null_resource.get_model_ip_prod]
     filename = "data/prod_model_health_url.txt"
 }
-
-output "prod_model_predict_url" {
-    value = data.local_file.prod_model_predict_url.content
-}
-
-output "prod_model_health_url" {
-    value = data.local_file.prod_model_health_url.content
-}
-
-output "test_model_predict_url" {
-    value = data.local_file.test_model_predict_url.content
-}
-
-output "test_model_health_url" {
-    value = data.local_file.test_model_health_url.content
-}
