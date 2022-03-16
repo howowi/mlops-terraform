@@ -26,7 +26,7 @@ resource oci_apm_synthetics_monitor test-ml-model-monitor {
             protocol = "TCP"
         }
         request_method = "GET"
-        verify_response_codes = "200"
+        verify_response_codes = ["200"]
     }
     is_run_once = "false"
     status = "ENABLED"
