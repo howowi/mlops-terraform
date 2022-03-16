@@ -128,7 +128,7 @@ variable "ocir_email" {
 }
 
 variable "create_oac" {
-  description = "create OAC"
+  description = "Important Note: Creating OAC requires admin access to IDSC to obtain access token."
   type = bool
 }
 
