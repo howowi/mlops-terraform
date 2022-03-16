@@ -179,25 +179,21 @@ variables:
     description: "Key in your email address"
 
 
-# outputs:
-#   cluster:
-#     type: string
-#     title: "OKE cluster details"
-#     visible: true
+outputs:
+  prod-ml-model-endpoint:
+    type: string
+    title: "Prod ML Model Endpoint"
+    displayText: "Prod ML Model Endpoint"
+    visible: true
 
-#   flex_node_pool:
-#     type: string
-#     title: "OKE node pool details"
-#     visible: true
+  test-ml-model-endpoint:
+    type: string
+    title: "Test ML Model Endpoint"
+    displayText: "Test ML Model Endpoint"
+    visible: true
 
-#   awx_login_password:
-#     type: string
-#     title: "AWX login Password"
-#     displayText: "AWX UI login password"
-#     visible: true
-
-#   awx_ui_ip:
-#     type: string
-#     title: "AWX UI IP address"
-#     displayText: "AWX UI IP address"
-#     visible: true
+  devops-code-repo-url:
+    type: string
+    title: "Code Repo URL"
+    displayText: "Code Repo URL"
+    visible: true
