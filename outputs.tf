@@ -17,3 +17,7 @@ output ml-model-container-repo-path {
 output container-reg-auth-token-id {
     value = oci_vault_secret.container-registry-auth-token.id
 }
+
+output apex-url {
+  value = oci_database_autonomous_database.mlops-adb-apex.connection_urls.apex_url
+}
