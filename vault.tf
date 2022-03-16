@@ -23,7 +23,7 @@ resource oci_vault_secret container-registry-auth-token {
   key_id = oci_kms_key.ml-ops-kms-master-key.id
   vault_id       = oci_kms_vault.ml-ops-kms-vault.id
   secret_content {
-      content_type = "SECRET"
+      content_type = "BASE64" #Options [BASE64]
       content = var.ocir_password
       name = "container-registry-auth-token"
   } 
