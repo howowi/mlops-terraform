@@ -197,3 +197,9 @@ outputs:
     title: "Code Repo URL"
     displayText: "Code Repo URL"
     visible: true
+
+  container-reg-auth-token-id:
+    type: string
+    title: "ID of auth token vault secret"
+    displayText: "ID of auth token vault secret"
+    visible: true
