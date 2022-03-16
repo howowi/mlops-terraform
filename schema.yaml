@@ -118,6 +118,7 @@ variables:
 
   kubernetes_version:
     title: "Kubernetes Version"
+    required: true
     type: enum
     description: "Please choose the supported Kubernetes version"
     default: "v1.21.5"
@@ -129,6 +130,7 @@ variables:
 
   node_shape:
     title: "Node shape"
+    required: true
     type: oci:core:instanceshape:name
     description: "Please choose the supported instance shape for the node"
     dependsOn:      
@@ -136,16 +138,19 @@ variables:
 
   shape_ocpus:
     title: "Number of OCPUs of each node"
+    required: true
     type: string
     description: "Please key in the number of OCPUs"
 
   shape_mems:
     title: "Memory of each node in GB"
+    required: true
     type: string
     description: "Please key in the amount of memory in GB"
 
   image_os_id:
     title: "OS Image OCID of the node pool"
+    required: true
     type: oci:core:image:id
     description: "Please choose the supported OS image for the node"
     dependsOn:      
@@ -156,31 +161,37 @@ variables:
 
   email_address:
     title: "Email address for OCI DevOps Notification"
+    required: true
     type: string
     description: "Please provide a valid email address"
 
   ocir_url:
     title: "OCIR URL"
+    required: true
     type: "string"
     description: "<region-key>.ocir.io where <region-key> corresponds to the key for the Container Registry region you're using"
 
   ocir_username:
     title: "Username for OCIR Login"
+    required: true
     type: "string"
     description: "Federated: <tenancy-namespace>/oracleidentitycloudservice/<username>, IAM User: <tenancy-namespace>/<username>"
 
   ocir_password:
     title: "Password for OCIR Login"
+    required: true
     type: password
     description: "Key in the auth token of your user"
 
   ocir_password_base64:
     title: "Base64 Password for OCIR Login"
+    required: true
     type: password
     description: "Key in the Base64-encoded auth token of your user"
 
   ocir_email:
     title: "Email for OCIR Login"
+    required: true
     type: string
     description: "Key in your email address"
 
