@@ -137,6 +137,10 @@ variable "idsc_access_token" {
   default = "input token here"
 }
 
+variable "mlops_adb_admin_password" {
+  description = "Password for ADB Admin"
+}
+
 data "oci_core_services" "all_services" {
 }
 

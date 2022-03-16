@@ -46,7 +46,7 @@ variableGroups:
   variables:
     - email_address
 
-- title: Functions and Container Registry configuration
+- title: Functions and Container Registry Configuration
   visible: true
   variables:
     - ocir_username
@@ -60,6 +60,11 @@ variableGroups:
   variables:
     - create_oac
     - idsc_access_token
+
+- title: Autonomous Database and APEX Configuration
+  visible: true
+  variables:
+    - mlops_adb_admin_password
 
 variables:
   compartment_ocid:
@@ -213,6 +218,12 @@ variables:
     required: false
     description: "Obtain Access Token from IDSC"
     visible: create_oac
+
+  mlops_adb_admin_password:
+    title: "ADB Admin Password"
+    type: password
+    required: true
+    description: "Password for ADB Admin"
 
 outputs:
   prod-ml-model-endpoint:
