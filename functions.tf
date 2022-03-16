@@ -57,6 +57,7 @@ resource oci_functions_function trigger-build-func {
 }
 
 resource null_resource build-trigger-build-func {
+    depends_on = [oci_functions_function.test-ml-model-func]
     provisioner "local-exec" {
         command = "docker login ${var.ocir_url} -u ${var.ocir_username} -p '${var.ocir_password}' "
     }
