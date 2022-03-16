@@ -134,6 +134,7 @@ variable "create_oac" {
 
 variable "idsc_access_token" {
   description = "IDSC Access Token for OAC"
+  default = "input token here"
 }
 
 data "oci_core_services" "all_services" {
