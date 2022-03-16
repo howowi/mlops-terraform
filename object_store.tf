@@ -8,7 +8,6 @@ resource oci_objectstorage_bucket ml-model-test-datasets {
   namespace             = data.oci_objectstorage_namespace.os_namespace.namespace
   object_events_enabled = "false"
   storage_tier          = "Standard"
-  versioning            = "Disabled"
 }
 
 data local_file input_test_data_set1_false {
