@@ -19,5 +19,5 @@ output container-reg-auth-token-id {
 }
 
 output apex-url {
-  value = oci_database_autonomous_database.mlops-adb-apex.connection_urls["apex_url"]
+  value = oci_database_autonomous_database.mlops-adb-apex.connection_urls
 }
