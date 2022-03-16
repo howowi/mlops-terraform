@@ -1,9 +1,9 @@
-output prod-ml-model-endpoint {
-  value = oci_apigateway_deployment.prod-ml-model.endpoint
+output prod-ml-model-predict-endpoint {
+  value = "${oci_apigateway_deployment.prod-ml-model.endpoint}/predict"
 }
 
-output test-ml-model-endpoint {
-  value = oci_apigateway_deployment.test-ml-model.endpoint
+output test-ml-model-predict-endpoint {
+  value = "${oci_apigateway_deployment.test-ml-model.endpoint}/predict"
 }
 
 output devops-code-repo-url {
