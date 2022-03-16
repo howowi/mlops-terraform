@@ -75,13 +75,13 @@ resource "oci_devops_deploy_pipeline" "mlops-deploy-pipeline" {
         }
         items {
             name = "url_prod"
-            # default_value = "ml-model-test-datasets"
-            description = "Object Storage bucket that contains datasets for testing"
+            default_value = "${oci_apigateway_deployment.prod-ml-model.endpoint}/predict"
+            description = "Prod ML Model URL"
         }
         items {
             name = "url_test"
-            # default_value = "ml-model-test-datasets"
-            description = "Object Storage bucket that contains datasets for testing"
+            default_value = "${oci_apigateway_deployment.test-ml-model.endpoint}/predict"
+            description = "Test ML Model URL"
         }
     }
     description = "Deployment pipeline for MLOps"
