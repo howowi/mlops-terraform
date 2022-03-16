@@ -9,6 +9,7 @@ resource oci_database_autonomous_database mlops-adb-apex {
     cpu_core_count             = "1"
     data_safe_status           = "NOT_REGISTERED"
     data_storage_size_in_gb    = "1024"
+    data_storage_size_in_tbs    = "1"
     db_version                 = "19c"
     db_workload                = "APEX"
     is_auto_scaling_enabled     = "true"
