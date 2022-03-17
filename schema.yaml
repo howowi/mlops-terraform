@@ -1,0 +1,257 @@
+# Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+
+title: "MLOps Resources Deployment"
+Description: "Terraform Script to deploy MLOps resources to OCI"
+informationalText: "Terraform Script to deploy MLOps resources to OCI"
+schemaVersion: 1.1.0
+version: "20220210"
+locale: "en"
+
+variableGroups:
+- title: General Configuration
+  visible: false
+  variables:
+    - compartment_ocid
+    - tenancy_ocid
+    - region
+
+- title: General Configuration
+  visible: true
+  variables:
+    - resource_naming_prefix
+
+- title: Network Configuration
+  visible: true
+  variables:
+    - generic_vcn_cidr_blocks
+    - oke_vcn_cidr_blocks
+    - oke_k8sapiendpoint_subnet_cidr_block
+    - oke_service_lb_subnet_cidr_block
+    - oke_nodepool_cidr_block
+
+
+- title: OKE Cluster Configuration
+  visible: true
+  variables:
+    - kubernetes_version
+    - node_shape
+    - shape_ocpus
+    - shape_mems
+    - image_os_id
+    - ssh_public_key
+
+- title: OCI DevOps Configuration
+  visible: true
+  variables:
+    - email_address
+
+- title: Functions and Container Registry Configuration
+  visible: true
+  variables:
+    - ocir_username
+    - ocir_password
+    - ocir_password_base64
+    - ocir_url
+    - ocir_email
+
+- title: Oracle Analytics Cloud
+  visible: true
+  variables:
+    - create_oac
+    - idsc_access_token
+
+- title: Autonomous Database and APEX Configuration
+  visible: true
+  variables:
+    - mlops_adb_admin_password
+
+variables:
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+    title: "Compartment OCID" 
+    description: "Please select the target compartment"
+
+  tenancy_ocid:
+    type: oci:identity:tenancy:id
+    required: true
+    title: "Tenancy OCID"
+    description: "Please select the target tenancy"
+
+  region:
+    type: oci:identity:region:name
+    required: true
+    title: "Region"
+    description: "Please select the target region"
+
+  resource_naming_prefix:
+    type: string
+    required: true
+    title: "Resource naming prefix"
+    description: "Please input the resource naming prefix for OCI resources"
+
+  generic_vcn_cidr_blocks:
+    type: string
+    required: true
+    title: "Generic VCN CIDR Block"
+    description: "Please input the Generic VCN CIDR Block"
+
+  oke_vcn_cidr_blocks:
+    type: string
+    required: true
+    title: "OKE VCN CIDR Block"
+    description: "Please input the OKE VCN CIDR Block"
+
+  oke_k8sapiendpoint_subnet_cidr_block:
+    type: string
+    required: true
+    title: "OKE API Endpoint Subnet CIDR Block"
+    description: "Please input the OKE API Endpoint Subnet CIDR Block"
+
+  oke_service_lb_subnet_cidr_block:
+    type: string
+    required: true
+    title: "OKE Service Load Balancer Subnet CIDR Block"
+    description: "Please input the OKE Service Load Balancer Subnet CIDR Block"
+
+  oke_nodepool_cidr_block:
+    type: string
+    required: true
+    title: "OKE Node Pool Subnet CIDR Block"
+    description: "Please input the OKE Node Pool Subnet CIDR Block"
+
+  ssh_public_key:
+    title: "SSH Public Key"
+    type: oci:core:ssh:publickey
+    description: "The public SSH key for the key-pair that you want to use, if you wish to login to the instances over SSH"
+    required: true
+
+  kubernetes_version:
+    title: "Kubernetes Version"
+    required: true
+    type: enum
+    description: "Please choose the supported Kubernetes version"
+    default: "v1.21.5"
+    enum:
+      - "v1.21.5"
+      - "v1.20.11"
+      - "v1.20.8"
+      - "v1.19.15"
+
+  node_shape:
+    title: "Node shape"
+    required: true
+    type: oci:core:instanceshape:name
+    description: "Please choose the supported instance shape for the node"
+    dependsOn:      
+       compartmentId: ${compartment_ocid}
+
+  shape_ocpus:
+    title: "Number of OCPUs of each node"
+    required: true
+    type: string
+    description: "Please key in the number of OCPUs"
+
+  shape_mems:
+    title: "Memory of each node in GB"
+    required: true
+    type: string
+    description: "Please key in the amount of memory in GB"
+
+  image_os_id:
+    title: "OS Image OCID of the node pool"
+    required: true
+    type: oci:core:image:id
+    description: "Please choose the supported OS image for the node"
+    dependsOn:      
+       compartmentId: ${compartment_ocid}
+       operatingSystem: "Oracle Linux"
+       operatingSystemVersion: "7.9"
+       shape: ${node_shape}
+
+  email_address:
+    title: "Email address for OCI DevOps Notification"
+    required: true
+    type: string
+    description: "Please provide a valid email address"
+
+  ocir_url:
+    title: "OCIR URL"
+    required: true
+    type: "string"
+    description: "<region-key>.ocir.io where <region-key> corresponds to the key for the Container Registry region you're using"
+
+  ocir_username:
+    title: "Username for OCIR Login"
+    required: true
+    type: "string"
+    description: "Federated: <tenancy-namespace>/oracleidentitycloudservice/<username>, IAM User: <tenancy-namespace>/<username>"
+
+  ocir_password:
+    title: "Password for OCIR Login"
+    required: true
+    type: password
+    description: "Key in the auth token of your user"
+
+  ocir_password_base64:
+    title: "Base64 Password for OCIR Login"
+    required: true
+    type: password
+    description: "Key in the Base64-encoded auth token of your user"
+
+  ocir_email:
+    title: "Email for OCIR Login"
+    required: true
+    type: string
+    description: "Key in your email address"
+
+  create_oac:
+    title: "Create OAC Instance in this stack? Otherwise create manually."
+    type: boolean
+    required: true
+    default: false
+
+  idsc_access_token:
+    title: "IDSC Access Token for OAC"
+    type: password
+    required: false
+    description: "Obtain Access Token from IDSC"
+    visible: create_oac
+
+  mlops_adb_admin_password:
+    title: "ADB Admin Password"
+    type: password
+    required: true
+    description: "Password for ADB Admin"
+
+outputs:
+  prod-ml-model-endpoint:
+    type: string
+    title: "Prod ML Model Endpoint"
+    displayText: "Prod ML Model Endpoint"
+    visible: true
+
+  test-ml-model-endpoint:
+    type: string
+    title: "Test ML Model Endpoint"
+    displayText: "Test ML Model Endpoint"
+    visible: true
+
+  devops-code-repo-url:
+    type: string
+    title: "Code Repo URL"
+    displayText: "Code Repo URL"
+    visible: true
+
+  container-reg-auth-token-id:
+    type: string
+    title: "ID of auth token vault secret"
+    displayText: "ID of auth token vault secret"
+    visible: true
+  
+  apex-url:
+    type: string
+    title: "URL of APEX instance"
+    displayText: "URL of APEX instance"
+    visible: true

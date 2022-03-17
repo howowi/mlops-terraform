@@ -8,7 +8,6 @@ resource oci_objectstorage_bucket ml-model-test-datasets {
   namespace             = data.oci_objectstorage_namespace.os_namespace.namespace
   object_events_enabled = "false"
   storage_tier          = "Standard"
-  versioning            = "Enabled"
 }
 
 data local_file input_test_data_set1_false {
@@ -16,6 +15,7 @@ data local_file input_test_data_set1_false {
 }
 
 resource oci_objectstorage_object ml-model-test-datasets_object_1 {
+  depends_on = [oci_objectstorage_bucket.ml-model-test-datasets]
   bucket = oci_objectstorage_bucket.ml-model-test-datasets.name
   content = data.local_file.input_test_data_set1_false.content
   content_type = "application/json"
@@ -29,6 +29,7 @@ data local_file input_test_data_set2_true {
 }
 
 resource oci_objectstorage_object ml-model-test-datasets_object_2 {
+  depends_on = [oci_objectstorage_bucket.ml-model-test-datasets]
   bucket = oci_objectstorage_bucket.ml-model-test-datasets.name
   content = data.local_file.input_test_data_set2_true.content
   content_type = "application/json"
