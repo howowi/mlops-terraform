@@ -8,7 +8,7 @@
 
 This terraform stack deploys OCI resources needed to operationalize ML models using MLOps methodology for bank loan application use case. Data Scientists will be able to develop and train ML models using OCI Data Science and manage the ML models using Model Catalog. When a new model is committed to Model Catalog, OCI DevOps build pipeline will be triggered automatically to package the ML model into container then the model will be deployed and tested in the test OKE environement before publishing to production enviroment when it's approved by a release manager. The API GW will be interfacing with the model endpoint and served as public endpoint for external integration. APEX is used as the frontend for bank loan application and the **Smart Approval** feature makes use of the ML model to predict the eligibility of the loan.
 
-## **Pre-requisites**
+## **Prerequisites**
 1. Users with `"manage"` permission for the resources listed in this [section](#deployed-resources).
 2. Enough service limits and quota in the tenancy and compartment.
 3. Create auth token. Refer to this [link](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcredentials.htm#create_swift_password)
@@ -70,7 +70,7 @@ These OCI resources will be deployed by this stack:
 
 ## **Completing Demo Setup Tasks**
 
-1. Import APEX bank loan application [here](apex_import/readme.md#apex-setup-procedures)
+1. Import APEX bank loan application [here](apex_import/README.md#apex-setup-procedures)
 
 2. Import OAC Dashboard [here]()
 
