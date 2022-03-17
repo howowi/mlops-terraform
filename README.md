@@ -19,7 +19,7 @@ This terraform stack deploys OCI resources needed to operationalize ML models us
 
 Click the button to deploy to OCI.
 
-[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/howowi/mlops-terraform/releases/download/v1.0.0/mlops-terraform-v1.0.0.zip)
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/howowi/mlops-terraform/releases/download/v1.0.1/mlops-terraformv1.0.1.zip)
 
 ## **Deployed Resources** 
 
