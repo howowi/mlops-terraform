@@ -132,12 +132,12 @@ variables:
     required: true
     type: enum
     description: "Please choose the supported Kubernetes version"
-    default: "v1.21.5"
+    default: "v1.25.4"
     enum:
-      - "v1.21.5"
-      - "v1.20.11"
-      - "v1.20.8"
-      - "v1.19.15"
+      - "v1.25.4"
+      - "v1.24.1"
+      - "v1.23.4"
+      - "v1.22.5"
 
   node_shape:
     title: "Node shape"
