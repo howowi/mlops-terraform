@@ -167,7 +167,7 @@ variables:
     dependsOn:      
        compartmentId: ${compartment_ocid}
        operatingSystem: "Oracle Linux"
-       operatingSystemVersion: "7.9"
+      #  operatingSystemVersion: "7.9"
        shape: ${node_shape}
 
   email_address:
